@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>table</title>
+  </head>
+  <style>
+    /* table,
+    th,
+    td {
+      border-collapse: separate;
+      border-spacing: 20px 30px;
+      width: 100%;
+      text-align: center;
+    }
+    th {
+      height: 50px vertical-allign;
+    }
+    td {
+      height: 50px;
+    }
+    caption {
+      caption-side: bottom;
+    } */
+    /* #list {width: 100%;}
+    #list td
+    #list th {border: 1px dotted grey;
+    text-align: center;}
+    #list th { color: white;
+    background-color: blue;}
+    #list tr,alt td {background-color:yellow;
+    } */
+    /* tr:nth-child(odd) {
+      background-color: yellow;
+    } */
+    tr:h-not(:last-child) {
+      background-color: yellow;
+    }
+    /* tr:first-child {
+      background-color: blue;
+      color: white; 
+    } */
+  </style>
+  <body>
+    <!-- <table>
+      <caption>
+        VIP고객리스트
+      </caption>
+      <tr>
+        <th>이름</th>
+        <th>이메일</th>
+      </tr>
+
+      <tr>
+        <td>김철수</td>
+        <td>chul@google.com</td>
+      </tr> 
+
+      <tr>
+        <td>김영희</td>
+        <td>young@google.com</td>
+      </tr>
+    </table> -->
+    <table id="list">
+        <tr>
+            <th>이름</th>
+            <th>이메일</th>
+          </tr>
+    
+          <tr>
+            <td>김철수</td>
+            <td>chul@google.com</td>
+          </tr> 
+    
+          <tr></tr>
+            <tr class="alt">
+            <td>김영희</td>
+            <td>young@google.com</td>
+          </tr>
+          <tr></tr>
+      <tr>
+        <td>홍길동</td>
+        <td>hong@google.com</td>
+      </tr>
+      <tr></tr>
+      <tr class="alt">
+        <td>김수진</td>
+        <td>sujin@google.com</td>
+      </tr>
+      <tr>
+        <td>홍길동</td>
+        <td>hong@google.com</td>
+      </tr>
+      <tr>
+        <td>홍길동</td>
+        <td>hong@google.com</td>
+      </tr>
+      <tr>
+        <td>홍길동</td>
+        <td>hong@google.com</td>
+      </tr>
+
+
+  </body>
+</html>
