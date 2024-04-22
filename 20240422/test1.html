@@ -10,16 +10,21 @@
       display: flex;
       list-style-type: none;
       border: 5px solid red;
-      padding: 0;
-      font-size: 48px;
+      justify-content: center;
+    }
+
+    #container > li {
+      border: 2px solid black;
+      width: 250px;
+      height: 30px;
+      background-color: rgb(222, 209, 111);
+      text-align: center;
       flex-direction: column;
-      height: 800px;
-      justify-content: space-evenly;
     }
   </style>
   <body>
     <p>아래와 같이 만들어 보세요.</p>
-    <ul>
+    <ul id="container">
       <li>1</li>
       <li>2</li>
       <li>3</li>
