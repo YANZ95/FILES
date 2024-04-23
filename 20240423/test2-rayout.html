@@ -26,30 +26,57 @@
         background-color: #f9f900;
         flex-grow: 0.1;
         flex-direction: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1em;
       }
       #main {
         background-color: rgb(176, 126, 176);
+        flex-direction: row;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        align-content: space-evenly;
+        font-size: 1em;
       }
 
       #nav {
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
       }
 
       #left {
         background-color: #ffc0cb;
+        flex-grow: 1;
+        font-size: 2em;
+        padding: 0 5%;
+        margin-right: 10px;
       }
 
       #content {
         background-color: white;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       #right {
         background-color: #ffc0cb;
+        flex-grow: 1;
+        font-size: 1em;
+        padding: 0 5%;
       }
 
       #footer {
         background-color: rgb(102, 95, 180);
+        flex-grow: 0.5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1em;
       }
     </style>
   </head>
@@ -82,7 +109,11 @@
             <li><a href="index.html"></a><a href="#">식품</a></li>
           </ul>
         </aside>
-        <div id="content">content</div>
+        <section id="content">
+          <article id="article1">
+            <iframe src="computer.html"></iframe>
+          </article>
+        </section>
         <aside id="right">
           <h2>Shopping Cart</h2>
           <div id="Shopping Cart"></div>
