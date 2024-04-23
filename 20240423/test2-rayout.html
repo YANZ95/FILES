@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test2</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+      }
+      #wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      #header {
+        background-color: #f9f900;
+        flex-grow: 0.1;
+        flex-direction: center;
+      }
+      #main {
+        background-color: rgb(176, 126, 176);
+      }
+
+      #nav {
+        display: flex;
+        flex-direction: row;
+      }
+
+      #left {
+        background-color: #ffc0cb;
+      }
+
+      #content {
+        background-color: white;
+      }
+
+      #right {
+        background-color: #ffc0cb;
+      }
+
+      #footer {
+        background-color: rgb(102, 95, 180);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header" width="50">
+        <h1>
+          <img src="../IMAGE/loopy.jpg" width="50" /><a href="">Web shopping</a>
+        </h1>
+      </div>
+      <div id="main">
+        <a href>HOME </a>
+        <a href>SHOPPING </a>
+        <a href>ABOUT </a>
+        <a href>NEWS </a>
+        <a href>MY ACCOUNT </a>
+        <a href>CONTACTS</a>
+      </div>
+      <div id="nav">
+        <aside id="left">
+          <h1>카테고리</h1>
+          <ul>
+            <li><a href="index.html"></a><a href="#">컴퓨터</a></li>
+            <li><a href="index.html"></a><a href="#">의류</a></li>
+            <li><a href="index.html"></a><a href="#">음악</a></li>
+            <li><a href="index.html"></a><a href="#">영화</a></li>
+            <li><a href="index.html"></a><a href="#">스포체/레저</a></li>
+            <a href="#"></a>
+            <li><a href="index.html"></a><a href="#">가구/인테리어</a></li>
+            <li><a href="index.html"></a><a href="#">식품</a></li>
+          </ul>
+        </aside>
+        <div id="content">content</div>
+        <aside id="right">
+          <h2>Shopping Cart</h2>
+          <div id="Shopping Cart"></div>
+          <p>현재 쇼핑카트에 물품이 없습니다</p>
+          <a href>쇼핑카트 보기</a>
+          <div id="login">
+            <h3>Log In</h3>
+            <a href>회원가입</a>
+            <a href>비밀번호 분실</a>
+            <form action="#"></form>
+          </div>
+        </aside>
+      </div>
+      <div id="footer">2019.08.23 DW아카데미 042-123-4567</div>
+    </div>
+  </body>
+</html>
