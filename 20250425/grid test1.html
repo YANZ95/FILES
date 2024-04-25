@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .container {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      border: 5px solid white;
+      height: 500px;
+
+      display: grid;
+      /* grid-template-columns: 200px 1fr 200px;
+      grid-template-rows: 50px 50px 1fr 50px; */
+      grid-template-areas: "header header header";
+      align-items: stretch;
+      /* align-items: start; */
+      /* align-items: end; */
+      /* align-items: center; */
+      /* justify-items: start; */
+      /* justify-items: center; */
+      /* justify-items: end; */
+    }
+
+    li:nth-child(1) {
+      grid-area: header;
+      align-self: start;
+      justify-self: center;
+      background-color: yellow;
+      width: 300px;
+      height: 300px;
+    }
+
+    li:nth-child(2) {
+      grid-area: nav;
+      align-self: center;
+      justify-self: start;
+      background-color: pink;
+    }
+
+    li:nth-child(3) {
+      grid-area: main;
+      align-self: start;
+      justify-self: end;
+      background-color: white;
+    }
+
+    li:nth-child(4) {
+      grid-area: footer;
+      align-self: center;
+      justify-self: start;
+      background-color: purple;
+    }
+  </style>
+  <body>
+    <div id="wrapper">
+      <div id="header"></div>
+      <div id="content">
+        <div id="nav"></div>
+        <div id="main"></div>
+      <div id="footer"></div>
+    </div>
+  </body>
+</html>
