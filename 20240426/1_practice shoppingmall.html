@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    html,
+    body,
+    #wrapper {
+      width: 100%;
+      height: 100%;
+    }
+
+    #wrapper {
+      display: grid;
+      grid-template-rows: 1fr 1fr 4fr 1fr;
+      grid-template-rows: repeat 1,
+        1fr minmax(65px, auto) 6fr minmax(65px, auto);
+    }
+
+    # header {
+      background-color: #ffd65c;
+    }
+
+    # nav {
+      background-color: #ffd65c;
+    }
+
+    # main {
+      background-color: #ffd65c;
+    }
+
+    # header {
+      background-color: #ffd65c;
+    }
+  </style>
+
+  <body>
+    <div id="wrapper">
+      <ul id="header"></ul>
+      <ul id="nav"></ul>
+      <ul id="main">
+        <div id></div>
+      </ul>
+      <ul id="footer"></ul>
+
+      <div id="header"></div>
+      <div id="main"></div>
+    </div>
+  </body>
+</html>

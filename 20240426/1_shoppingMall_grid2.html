@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    html,
+    body,
+    #wrapper {
+      width: 100%;
+      height: 100%;
+    }
+    #wrapper {
+      display: grid;
+      grid-template-rows: repeat(
+        1,
+        1fr minmax(65px, auto) 6fr minmax(65px, auto)
+      );
+      gap: 1%;
+    }
+    #header {
+      background-color: #ffd65c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #header img {
+      width: 100px;
+      height: 100px;
+    }
+    #nav {
+      background-color: #d1b3e0;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10%, auto));
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    li {
+      color: white;
+      font-weight: 600;
+    }
+
+    li a {
+      color: inherit;
+      text-decoration: none;
+    }
+    #main {
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+      gap: 1%;
+    }
+    .aside {
+      background-color: #faebeb;
+    }
+    #content {
+      background-color: #fafafa;
+    }
+    #footer {
+      background-color: #ccccf2;
+    }
+  </style>
+  <body>
+    <!-- div*5 -->
+    <!-- div>div*3 -->
+    <!-- div>(div>div*3)+div>div*5 -->
+
+    <div id="wrapper">
+      <div id="header">
+        <img src="../resources/img/시바견.png" />
+        <span>SIBA Shopping</span>
+      </div>
+      <ul id="nav">
+        <li>HOME</li>
+        <li>SHOPPING ABOUT</li>
+        <li>NEWS</li>
+        <li>MY ACCOUNT</li>
+        <li>CONTACTS</li>
+      </ul>
+      <div id="main">
+        <div id="aside1" class="aside"></div>
+        <h3>카테고리</h3>
+        <ul>
+          <li><a href="#">데스크탑</a></li>
+          <li><a href="#">노트북</a></li>
+          <li><a href="#">모니터</a></li>
+          <li><a href="#">마우스</a></li>
+          <li><a href="#">키보드</a></li>
+          <li><a href="#">스피커</a></li>
+          <li><a href="#">책상</a></li>
+        </ul>
+        <div id="content"></div>
+        <div id="aside2" class="aside"></div>
+      </div>
+      <div id="footer"></div>
+    </div>
+  </body>
+</html>
