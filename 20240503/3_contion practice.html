@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조건문 연습</title>
+  </head>
+  <body>
+    <script>
+      //  0. 변수 선언
+      let num1, num2, operator, result;
+      // 1. 첫번째 숫자를 입력받을 프롬프트를 띄운다.
+      num1 = prompt("첫번째 숫자를 입력해주세요.");
+      // 2. 두번째 숫자를 입력받을 프롬프트를 띄운다.
+      num2 = prompt("두번째 숫자를 입력해주세요.");
+      // 3. 연산자를 입력받을 프롬프트를 띄운다.
+      operator = prompt("연산자(+,-,*,/,%)를 입력해주세요.");
+      // 4. 연산자를 확인할 조건문이 필요문안에서 계산 결과를 도출한다.
+      if (operator == "+") {
+        result = num1 + num2;
+      } else if (operator == "-") {
+        result = num1 - num2;
+      } else if (operator == "*") {
+        result = num1 * num2;
+      } else if (operator == "/") {
+        result = num1 / num2;
+      } else {
+        result = num1 % num2;
+      }
+      //  5. 화면에 출력한다.
+      document.write(
+        `<h1>${num1} ${num1} ${operator} ${num2} = $(result)</h1>`
+      );
+      //   function calculate(num1, num2, operator) {
+      //     if (operator === "+") {
+      //       return num1 + num2;
+      //     } else if (operator === "-") {
+      //       return num1 - num2;
+      //     } else if (operator === "*") {
+      //       return num1 * num2;
+      //     } else if (operator === "/") {
+      //       if (num2 !== 0) {
+      //         return num1 / num2;
+      //       } else {
+      //         return "Error: Division by zero!";
+      //       }
+      //     } else {
+      //       return "Error: Invalid operator!";
+      //     }
+      //   }
+
+      //   // 사용자 입력 받기
+      //   var num1 = parseFloat(
+      //     prompt("스크립트 프롬프트 첫 번째 숫자를 입력하세요 ")
+      //   );
+      //   var num2 = parseFloat(
+      //     prompt("스크립트 프롬프트 두 번째 숫자를 입력하세요 ")
+      //   );
+      //   var operator = prompt(
+      //     "스크립트 프롬프트 연산자를 입력하세요 (+, -, *, /,%  중 하나) "
+      //   );
+
+      //   // 계산 결과 출력
+      //   var result = calculate(num1, num2, operator);
+      //   alert("결과: " + result);
+    </script>
+  </body>
+</html>
