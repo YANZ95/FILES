@@ -7,33 +7,222 @@
   </head>
   <body>
     <script>
-            //  1 ~ 20 까지의 숫자 중 짝수만 출력하세요.
-            for (let i = 1; i <= 20; i = i + 2) {
-              if (i % 2 == 0) {
-                document.write(`<h1>${i}</h1>`);
-              }
-            }
-
-            //   별찍기
-            //  *****
-            //  *****
-            //  *****
-            //  *****
-            //  *****
-
-            for(let i = 0; i <= 5; i++) {
-      for;(let j = 0; j < 5; j++) {
-          document. write(`*`);
+      //  1 ~ 20 까지의 숫자 중 짝수만 출력하세요.
+      for (let i = 1; i <= 20; i = i + 2) {
+        if (i % 2 == 0);
+        {
+          document.write(`<h1>${i}</h1>`);
+        }
       }
-      document.write(`<br>`);
 
-            }
+      // //   별찍기
+      // //  *****
+      // //  *****
+      // //  *****
+      // //  *****
+      // //  *****
 
-      //*
-      //**
-      //***
-      //****
-      //*****
+      // // 5X5
+      // // 왜 처음과 끝의 별수가 일정하지???
+
+      // for (let i = 1; i <= 5; i++) {
+      //   for (let j = 1; j <= 5; j++) {
+      //     document.write(`*`);
+      //   }
+      //   document.write(`<br>`);
+      // }
+
+      // // 왜 작동이 안 죄? 모르갰다.
+
+      // 별찍기
+      // *****
+      // *****
+      // *****
+      // *****
+      // *****
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= 5; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      document.write(`<hr>`);
+      // *
+      // **
+      // ***
+      // ****
+      // *****
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= i; j++) {
+          // 1 2 3 4 5
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      //     *
+      //    **
+      //   ***
+      //  ****
+      // *****
+      for (let i = 1; i <= 5; i++) {
+        // 공백 4 3 2 1 0
+        //     i        k
+        //     1     4 3 2 1
+        //     2      4 3 2
+        //     3       4 3
+        //     4        4
+        //     5      false
+        for (let k = 4; k >= i; k--) {
+          document.write(`&nbsp;`);
+        }
+        for (let j = 1; j <= i; j++) {
+          // 1 2 3 4 5
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      // *****
+      // ****
+      // ***
+      // **
+      // *
+      document.write(`<hr>`);
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 5; j >= i; j--) {
+          // 5 4 3 2 1
+          // 5 4 3 2
+          // 5 4 3
+          // 5 4
+          // 5
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      //  *****
+      //   ****
+      //    ***
+      //     **
+      //      *
+
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= i - 1; j++) {
+          document.write(`&nbsp;`);
+        }
+        for (let k = 5; k >= i; k--) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      //  1부터 사용자가 입력한 숫자까지의 합을 더해서 화면에 출력해주세요.
+      // 1. 사용자에게 값(숫자)을 입력받는다.
+      let range = +prompt("숫자를 입력하세요.");
+      let sum = 0; // NaN sum = sum + 1;
+
+      // 2. 반복문을 사용하여 1부터 사용자가 입력한 숫자까지의 합을 입력한다.
+      let i = 0;
+      while (i <= range) {
+        sum += i;
+        i++;
+      }
+
+      //  3. 계산된 합을 화면에 출력한다.
+      document.write(`사용자가 입력한 숫자 : ${range}, chd gkq : ${sum}`);
+      // let number = prompt("숫자를 입력해주세요:");
+      // let sum = 0;
+      // for (let i = 1; i <= number; i++) {
+      //   sum += i;
+      // }
+      // alert(`1부터 ${number}까지의 합은 ${sum}입니다.`);
+
+      //       *
+      //      ***
+      //     *****
+      //    *******
+      //   *********
+
+      // 크리스마스 만드는 거 너무 어려운데 가능한겨?
+
+      //  2가지 방법이 있다고 했다.
+      // 1. 2개의 트리를 만들어 합친다.
+      // 2. 여백을 이용해서 만든다.
+
+      for (let i = 1; i <= 5; i++) {
+        for (let k = 4; k >= i; k--) {
+          document.write(`&nbsp;`);
+        }
+        for (let j = 1; j <= 2 * i - 1; j++) {
+          document.write(`*`);
+        }
+        // for (let j = 1; j <= i; j++) {
+        //   // 1 2 3 4 5
+        //   document.write(`*`);
+        // }
+        // for (let l = 1; l < i; l++) {
+        //   document.write(`*`);
+        // }
+
+        document.write(`<br>`);
+      }
+
+      // const height = 5; // 트리의 높이
+
+      // for (let i = 1; i <= height; i++) {
+      //   // 각 행의 공백 개수와 별표 개수 계산
+      //   const spaces = height - i;
+      //   const stars = 2 * i - 1;
+
+      //   // 공백 출력
+      //   for (let j = 1; j <= spaces; j++) {
+      //     document.write("&nbsp;");
+      //   }
+
+      //   // 별표 출력
+      //   for (let k = 1; k <= stars; k++) {
+      //     document.write("*");
+      //   }
+
+      //   // 줄바꿈
+      //   document.write("<br>");
+      // }
+
+      //   *********
+      //    *******
+      //     *****
+      //      ***
+      //       *
+
+      for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < i; j++) {
+          document.write(`&nbsp;`);
+        }
+        for (let k = 8; k >= 1 * 2; k--) {
+          document.write(`*`);
+        }
+        // for (let j = 1; j <= i; j++) {
+        //   // 1 2 3 4 5
+        //   document.write(`*`);
+        // }
+        // for (let l = 1; l < i; l++) {
+        //   document.write(`*`);
+        // }
+
+        document.write(`<br>`);
+      }
+
+      // 1
+      // 2
+      // 3
+      // 4
+      // 5
+      // 4
+      // 3
+      // 2
+      // 1
     </script>
   </body>
 </html>
