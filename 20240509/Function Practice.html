@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>함수연습</title>
+  </head>
+  <body>
+    <button onclick="inputPrompt()">Click</button>
+    <script>
+           function sum(a, b) {
+             console.log(`a : ${a},  b : ${b}`);
+             return a + b;
+           }
+
+           // sum(2, 6); //   sum(); 함수의 호출(사용)
+
+           function inputpromt() {
+             const x = +prompt(`숫자를 입력하세요.`);
+             const y = +prompt(`숫자를 입력하세요.`);
+             let result = sum(x, y);
+             console.log(`sum 함수의 return 값 : ${result}`);
+           }
+
+           //  1. 둘리가 학교에서 키 순으로 줄을 설 때 몇번째로 서야 하는 지 궁금해졌다.
+           //  둘리네 반 친구들의 키가 담긴 정수 배열과 둘리의 키가 파라미터로 주어질 때,
+           //  둘리보다 키가 큰 사람의 수를 return 해주는 함수를 작성해보세요.
+
+           function solution(array, height) {
+             let answer = 0;
+
+             return answer;
+           }
+
+           solution([149, 180, 192, 178, 160], 165);
+
+           //  2. [1,2,3 ....,10] 인 배열을 선언 하고, 해당 배열에서 짝수만 골라
+           //  새로운 배열로 만들어 콘솔창에 출력하세요. (push 사용)
+           const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+           const arr2 = [];
+           //  2.1 배열 선언(1~10까지 들어있는 )
+           for (let i = 0; i < arr.length; i++) {
+             if (arr[i] % 2 == 0) {
+               arr2.push(arr[i]);
+             }
+             // document.write(`<h1>${arr3[i]}</h1>`);
+           }
+           // 2.2 선언된 배열 까대기하면서 짝수만 골라 새로운 배열 선언
+      for(let i = 0; i < num/Arr. length)
+           // 2.3 새로 생성된 배열 콘솔창에 출력
+
+           function solution(array, height) {
+             let answer = 0;
+
+             return answer;
+           }
+
+           solution([]);
+    </script>
+  </body>
+</html>
