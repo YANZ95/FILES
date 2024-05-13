@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+  </head>
+  <style>
+    div {
+      width: 300px;
+      height: 600px;
+      border: 2px solid #c5c5c5;
+      position: absolute;
+      top: 100px;
+      left: 200px;
+      padding: 0 10px;
+      border-radius: 10px;
+      overflow: auto;
+      scrollbar-gutter: stable both-edges;
+    }
+    /* 
+::-webkit-scrollbar : 스크롤바 전체
+::-webkit-scrollbar-thumb : 드래그 가능한 스크롤 핸들 막대
+::-webkit-scrollbar-track : 드래그 가능한 스크롤 핸들 막대
+::-webkit-scrollbar-track-piece : 스크롤 핸들 막대 부분을 제외한 남은 빈 공간
+::-webkit-scrollbar-button : 스크롤바의 방향 버튼
+::-webkit-scrollbar-corner :  수평/수직 스크롤 막대가 만나는 스크롤 막대의 하단 모서리
+::-webkit-scrollbar-resizer : 스크롤바 코너에 나타나는 크기 조정 핸들 
+     */
+    div::-webkit-scrollbar {
+      /* 
+width: 세로축 스크롤바 폭 너비
+height: 가로축 스크롤바 ㅍ폭 너비
+*/
+      width: 1vw;
+      /* height: 14px; */
+    }
+
+    div::-webkit-scrollbar-thumb {
+      background-color: hsla(0, 0, 42%, 0.29);
+      border-radius: 100px;
+    }
+
+    /* div::-webkit-scrollbar-thumb:hover {
+        border: 4px solid transparent;
+        box-shadow: 6px 6px 0 rgba(34, 34, 34, 0.3);
+    }
+
+    div::-webkit-scrollbar-track {
+        box-shadow: none;
+        background-color: transparent;
+    } */
+
+    /* div::-webkit-scrollbar-button:vertical {
+        background-color: red;
+    } */
+
+    p {
+      background-color: yellow;
+      padding: 10px 5px;
+      border-radius: 10px;
+    }
+  </style>
+  <body>
+    <input id="input" placeholder="Add to do List" />
+    <button onclick="addTodoList()">CLICK</button>
+    <div>
+      <!-- <p>To Do List</p> -->
+    </div>
+  </body>
+  <script>
+    const input = document.querySelector(`#input`);
+    const div = document.querySelector(`div`);
+
+    function addTodoList() {
+      // 1.input 창에 입력된 값을 가져온다.
+      const inputValue = input.value; //사용자가 입력한 값
+      // 2. p 태그 생성 후 가져온 값을 넣어준다.
+      const pTag = document.createElement(`p`);
+      pTag.innerHTML = inputValue; // <p>inputValue</p>
+      //  3. p 태그의 배경색상을 변경한다.
+      chgBkColor(el);
+      // 4. div 태그에 p 태그를 넣어준다.
+      div.append(el);
+      // 5. input 창을 비워준다.
+      input.value = ``;
+    }
+
+    function chBkColor(tag) {
+      //  1. 3개의 랜덤 rgb값 추출
+      const colorArr = [];
+      for (let i = 0; i < 3; i++) {
+        const randNum = parseInt(Math.random() * 256);
+        colorArr.push(randNum);
+      }
+      // 2. 태그에 배경색상 적용
+      tag.style.backgroundColor = `rgb(${colorArr.toString()})`;
+
+      //  3. 배경색상에 따른 폰트 색상 변경
+      //  luma : #000000(검정) 색일 때 luma는 0, #FFFFFFF(흰색)일 때 luma는 254.99dlek.
+      //  0에 가까울 수록 배경색은어둡고, 255에 가까울수록 배경색은 밝은 색이다.
+
+      //  4. div 태그에 p 태그를 넣어준다.
+
+      //  5. input 창을 비워준다.
+
+      const luma =
+        0.2126 * colorArr[0] + 0.7152 * colorArr[1] + 0.0722 * colorArr[2];
+      //   if (luma <= 155) {
+      //     tag.style.color = `white`;
+      //   } else {
+      //     tag.style.color = `black`;
+      //   }
+      //   // 삼향연산자
+      tag.style.color = luma <= 155 ? `white` : `black`;
+    }
+  </script>
+</html>
+<!-- 요 함수에서 이게 힘들어진거잖아요. 여기서 적용이 되는 게 아니잖아요. 요렇게 만 한줄로 끝낼 수 있다는 거죠. 
+요거의 코드가 좀 더 지저분해질거에요. 하나의 함수 내에 코드가 좀 더 길어지겠죠. 모듈로 조ㅡ금씩 작성하는 게 보기에 좀 더 좋아요.
+그래서 요거 함수를 만드면 요기의 피 태그가 변경된다는 거겠죠. 변경된 피 함수가 여기 디브에 적용에 되니  인풋 좀 벨류를 여기에 넣어주면 
+안 보이게 하려면 오버 플로우 히든을 썻죠. 오버 스크롤을 쓰면 처음부터 나온느데 보기 싫죠? 스크롤을 주면 어때요? 세로 스크롤만 생기면 되는데 그쵸?
+그럴 때 주는게 오토였자나요. 그쵸? 그렇게 넣으면 이렇게 스크롤이 생기죠? 그쵸? 아무것도 입력안하고 클릭했을 때 입력 안 되게 하는 거 
+요거 다듬고 나서 설정할게요. 아무것도 입력안하거나 스페이스만 입력했을 때 입력안되게 하는 거는 다듬고 할게요. 이제 그거할 거죠
+3번~ 배겨, 배정된 루마 깞이 0에 가까워지면 어두워진다고 했죠? 그러면 배경색은 하얀 색으로 합시다.  루마가 0이 될수록 어두워지니 폰트는 밝은 색으로 합시다.
+스크롤에는 요 게 있어요. 스크롤 안에는 네모난 게 있어요. 요만큼을 보고 우리는 얘를 보고 스크롤 바라고 부르기로 했어요. 그 다음에 요
+녀석 있죠? 스크롤 버튼이라고 하기로 했어요. 삼각형 요거요. 요 삼각형  끄는 걸 스크롤 바 트랙이라고 
+아래 가로는 스크롤 썸이라고 했어요. 스크롤 바 트랙 사이에 여백은 스크롤바 썸 플레이스라고 해요.  그 다음에 스크롤 바 구석에는 
+스크롤 바 코너라고 해요. 그 다음에는 스크롤바 리사이저라고 있어요.  원래 생겼던 스크롤바는 css가 어느 정도 있는 거에요. 근데 얘를
+쓰는 건 아 커스텀을 하는구나. 아예 초기화를 해버려요. 버튼, 썸브만 쓸 거면 안 쓰는 게 나아요. 
+그리고 얘 마우것도 안 줬죠. css? 그래서 스크롤바 커스텀하는 게 은근히 까다로워요. 오버플로우 오토면 이것밖에 안 나와서 괜찮ㅇㅏ보일 수도 있습니다만 
+여기에도 적용해볼까요? 10px? 
+여기도 스크롤 바 있죠? 스크롤 바 버튼에 설정을 안 해 서 적용이 안 된 거에요. 스크롤 바 커스텀할 때는 웬만하면 빼는 편인데
+알기는 해야죠. ^^ 
+
+썸 트랙 호버 정도만 하고 웬만하면 안 합니다. 버티컬하면 사실 세로 방향의 버튼을 얘기하는 거고 가로는 호리젠탈이라는... 
+혹시라도 버튼 커미션할 거면 한 번 찾아보세요. 다 알 수는 없으니까.  굳이..굳이 하지 않겠습니다. 
+
+음, 예쁜 모양을 하나 만들어볼까요? 버튼 일단 없애고  레디우스 빼고 다 지워봅시다. 
+ -->

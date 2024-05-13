@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>색상 변경 함수</title>
+  </head>
+  <style>
+    div {
+      border: 2px solid red;
+      width: 300px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem;
+    }
+  </style>
+  <body>
+    <div id="chgDiv">
+      <span>kjy</span>
+    </div>
+    <br />
+    <button onclick="chgText()">텍스트입력</button>
+    <button onclick="chgbkgrdColor()">배경색상변경</button>
+    <button onclick="chgfontColor()">폰트 색상변경</button>
+    <script>
+      // 사용자에게 "색상명"을 입력받아서 요소적 스타일을 변경하는 함수를 만들어보자.
+
+      function chgText() {
+        //  1. 사용자에게 입력받을 prompt를 띄운다.
+        const text = prompt("텍스트를 입력해주세요.");
+
+        //  2. 입력받은 텍스트를 넣어줄 요소를 가져온다.
+        const divEl = document.querySelector(`#chgDiv`);
+
+        //  3. 가져온 요소에 입력받은 텍스트를 적용한다.
+        divEl.innerHTML = text;
+      }
+
+      function chgfontColor() {
+        //  1. 사용자에게 입력받을 prompt를 띄운다.
+        const fontColor = prompt("폰트 색상을 입력해주세요.");
+
+        //  2. 입력받은 텍스트를 넣어줄 요소를 가져온다.
+        const divEl = document.querySelector(`#chgDiv`);
+
+        //  3. 가져온 요소에 입력받은 색상을 적용한다.
+        divEl.style.backgroundColor = bkColor;
+      }
+
+      function chgbkgrdColor() {
+        //  1. 사용자에게 입력받을 prompt를 띄운다.
+        const bkColor = prompt("텍스트를 입력해주세요.");
+
+        //  2. 입력받은 텍스트를 넣어줄 요소를 가져온다.
+        const divEl = document.querySelector(`#chgDiv`);
+
+        //  3. 가져온 요소에 입력받은 색상을 적용한다.
+        divEl.style.backgroundColor = bkColor;
+      }
+
+      //   1. 사용자에게 prompt 로 이름을 입력 받는다.
+      // 2. 사용자에게 prompt 로 색상명을 입력받는다.
+    </script>
+  </body>
+</html>
+<!-- 태그도 스고 피 태그 내에서 비알 썻었죠? 도규먼트 와이트 그려주고 싶은 태그가
+있으면 문자열로 탁 붙였단 말이요 예를 들어서 이 디아이브이 이렇게 쓰고 싶어요.
+피ㅌ 태그에 스팬 태그에 새 문자열로 중첩 반복문을 아홉개의 테이블을 다큐먼트
+인어 헤이치 팀알 다큐먼트 쩜 랑리트는 어떤 요소를 바디 태그를 전체로 우리
+헤이팀알은 그러니까 뭐를 가져왔었죠? 뭐를 잡는 변수였어요? 뭐를 잡기 위해서 한
+게 점 헤이치팀알은 우리가 이렇게 만들어줄 댇상 인어 헤이팀알 바디태그에
+순서적으로 들어가는 게 아니잖아요 이름을 받을거라 했죠? 당연히 쓸 거라 생각하는 군 이렇게 할 수 있지?
+거기서 바로 못할 거라고 못하실거죠? 그래서 우리 배운 거에요. 축약형 단어들도 다 정해져 있습니다.
+백그라운드라는 ㅇ요어는 단어는 용어는 단어가 붙어지는 게 용어에요. 그래서 단어사전이 정해져 있어요.
+ 그래서 우리 백그라운드라ㅁ 하면 새개의 단어죠? 백 그라운드 컬러 이 세개의 단어가 합쳐진 겁니다. 그러면 세개의
+단어가 정해져 있겠죠? 그래서 회사 사전에서 세개의 단어가 있겠죠? 그렇게 정해지는 겁니다. 우리 저번에 했던 거랑
+똑같네요. 맞죠? 담아서 요소를 가져온 거는 피 태그를 가져온 거고 알이 에스티알을 인어 에스티알에 넣어줬잖아요 맞죠?
+맞아요? 이거 작성해볼수 있겠네요. 맞죠? 소문자 단어 뒤에 대문자 오는 걸 
+뭐라고 했죠? 카멜 함수라고 했죠. 색상명만 입력되게 했죠? 그렇죠? 뭐 이런식으로 넣고 싶다. 알지비가 들어간다. 이거에요. 색상명을
+입력되게 해야죠. 알지비도 해볼거에요.   -->

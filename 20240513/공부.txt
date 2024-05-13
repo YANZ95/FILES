@@ -1,0 +1,131 @@
+강사가 낸 문제가 뭐지?
+
+ to do list 를 만들어보랬지
+
+뭘 어떻게 만들라는 거지?
+
+전에 가르쳐준 데에 있으니 그걸로 만들어보랬지
+
+체인지 컬러 에선?
+
+텍스트 칸 입력
+ 
+버튼 만들기 
+
+바디
+<div id="chgDiv">
+<span>kjy</span>
+</div>
+<br />
+
+<button onclick="chgText">텍스트입력</button>
+
+
+스크립트
+
+funciton chgtext() {
+
+const text = prompt("텍스트를 입력해주세요. ")
+
+const divEl = document.querySelector
+
+divEl. innerHTML = text;
+}
+
+
+바꿀 창 만들기 
+
+
+과일 배열
+
+바디
+
+<div>
+<input id="input" placeholder="과일 이름을 입력해주세요. " />
+<button onclick="clickFn()">CLICK</button>
+</div>
+<h1></h1>
+
+/바디
+
+
+스크립트
+
+const fruits = [];
+function clickFn() {
+const input = document. querySelector(`#input`);
+const inputValue = input.value;
+fruits.push(inputValue);
+const. pTag = document. creatElement(`p`);
+pTag. innerHTML = fruits.join(`,`);
+document. querySelector(`h1`). append(pTag);
+input.value=``;
+input.focus();
+}
+
+스타일
+* {
+box-sizing: border-box;
+/* margin: 0; */
+}
+
+div {
+height: 100px;
+display: flex;
+gap: 10px;
+}
+
+
+button {
+padding: 20px;
+font-size: 1.5rem;
+hight: 100%;
+}
+
+
+
+랜덤 색깔 변경
+
+바디
+<div></div>
+<br />
+<button onclick="chgbkColor()">색상변경</button
+>
+/바디
+
+스크립트
+function chgbkcolor() {
+const colorArr = [];
+for (let i = 0; i < 3; i++) {
+const randNum = parseint(Math. random() * 256);
+colorArr.push(randNum);
+}
+
+const. divEl = document.querySelector(`div`);
+divEl.style.backgroundColor = `rgb(${colorArr.toString()} )`;
+
+
+
+
+
+지금 해야 될 일 
+일단 4번 트랙 똑같이 만들고 확인 및 비교해보기
+
+그리고 오늘 배운 거 한번 씩 다시 해보기 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
