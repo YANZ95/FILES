@@ -1,0 +1,18 @@
+어떻게 해야 저걸 가로로 만들지
+
+가로로 만들 때 필요한 게 뭘까?
+
+아무리 봐도 짐작가는 게 없는데...
+
+문자열로 가로를 만드는 거임!
+document.write(`<h1>${year}-${month}-${date}</h1>`);
+레트럴 표기법!!!!!
+
+안 되면 복습이나 하자 시발
+
+스크립트
+
+const now = new Date();
+document.write(`<h1>${now}</h1>`);
+
+const year = now.getFullYear();
