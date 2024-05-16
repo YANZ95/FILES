@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>window 객체</title>
+  </head>
+  <body>
+    <button>게임하러가기</button>
+
+    <p>버튼을 누르면 3초 후에 경고 박스가 화면에 표시됩니다.</p>
+    <button onclick="showAlert()">눌러보세요.</button>
+  </body>
+  <script>
+        function openPopup() {
+            open('../20240510/20240512' "http:://www.google.com","_blank", "팝업을 띄울 화면의 경로","새로운 창", width=1000 height=500)
+        }
+    function closePopup() {
+        child.close();
+    }
+
+    function showAlert( ) {
+        // setTimeout("콜백함수","지연시간");
+        setTimeout(function(){
+            alert('setTimeout()을 사용하여 3초 이후에 표시되었습니다.')
+        },3000);
+    }
+        function delayAlert() {
+            alert('setTimeout()을 사용하여 3초 이후에 표시되었습니다.')
+
+            function startInterval(){
+
+            }
+        }
+  </script>
+</html>
