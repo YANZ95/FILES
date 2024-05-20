@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>호이스팅</title>
+  </head>
+  <body></body>
+  <script>
+    // 화살표 함수는 function을 사용하지 않음
+    // 중괄호가 없으면 return 을 사용하지 않아도 됨
+    const arr = [1, 2, 3, 4, 5];
+    arr.map(function (v) {
+      return v * 3;
+    });
+
+    arr.map((v, x) => v * 3);
+
+    // 호이스팅
+    // let a = 10;
+    // if (true) {
+    //   console.log(a);
+    //   let a = 20;
+    // }
+
+    // if (true) {
+    //   var test = true;
+    // }
+
+    // alert(test);
+
+    // 스코프 - 범위
+    //  var ==> 블록 스코프가 없다. 전역 or 함수
+    //  함수 안에서 선언됬을 때 지역 변수 역할을 한다.
+    // 근데 이러면 굉장히 헷갈리게 된다.
+    // 선언한 것을 다시 선언할 수 있게 됨
+    // 함수 명이 겹쳐도, 굉장히 불편한 거임
+    // 분명 겹쳘일이 있을거라서 위에 var가 있으면 큰일남
+    //   개발자들이 헷갈릴 일을 막기 위해서 나온게 ES6임
+
+    function varTest() {
+      var test = 5;
+    }
+    alert(test);
+    var test = 10;
+    var test = 20;
+    //  ES6 ==> let, const
+    // let,const는 블록 레벨의 스코프를 가진다.
+
+    function sayHi() {
+      phrase = "Hello";
+
+      var phrase;
+
+      alert(phrase);
+    }
+    sayHi();
+
+    // var, let, const, function, class
+    //  var은 호이스팅시 선언과 초기화가 동시에 이루어진다.
+    // lest test; // =>undefined
+    // 선언한다는 것은 test라는 함수가 들어갈 공간을 만든다는 말과 같다. 비어있는 집을 만든다고 이해하면 된다.
+    // undefined 라는 것은 공간을 만들고 가구를 집어넣는 것이라고 보면 됨
+
+    // let은 선언까지만 됨, 우리가 알고 있는 순서대로만 작성이 가능함
+    // var은 한꺼번에 되지만, let은 그게 안 된다.
+    // 이걸 만나야 초기화가 된다. 안 넣어줘도 되는 건 undefined
+
+    console.log(bar);
+    var foo;
+
+    console.log(Bar);
+    let bar;
+    // 일시적 사간단계, tdz 존이라고 함
+    // var을 쓰면 무적임. 근데 모든 게 다 되서 꼬일 수가 있다.
+    // 그래서 만든 게 let, const를 만든 거임
+    // 부분적으로 쓰면 var 쓰면 안 됨
+    // var 만나는 순간 괴물을 만날 수 있음
+    // tdz 존에서는 변수를 사용하지 않음
+    // 우리가 헷갈리지 않으려면 let과 함수선언식을 사용한다.
+    // 근데 사실 함수를 만드는 건 함수선언식과 함수표현식을 써야 된다 둘중 하나로 나뉘어짐
+    // 함수 쓰는 이유가 언제 어디서든 사용하려고 만든 거임
+    // 개발자들은 분파가 나뉘어져 있음. 정답은 없음
+    // 정답은 없는데 여러분들이 이 분파에 추가가된다.
+    // 강사는 함수 표현식을 많이 씀. 변수 다 쓰고 나서 그 다음에 함수를 착착착 씀
+
+    // 변수 선언의 단계 ==> 선언단계 > 초기화단계 > 할당단계
+
+    // 변수 선언의 3단계 중요하다.
+    //  let, const의 차이점을 잘 생각해두기
+
+    // 자바스크립트 엔진이 실행되면서 선언 단계가 실행된다.
+    // 아직 변수가 초기화(undefined)되지 않았다.
+
+    // for (var i = 0; i < 10; i++) {
+    //   console.log(i);
+    // }
+
+    // alert(i);
+
+    // 함수 선언식 vs 함수 표현식
+    // 함수 선언식
+
+    // aaa();
+    // bbb();
+
+    // function aaa() {
+    //   alert("aaa 함수");
+    // }
+    // 함수 표현식
+    // 함수를 익명함수로 만들고 함수의 선을 여기 함수(bbb) 에 담았다.
+    //  함수 표현식은 두가지 변수 선언, 함수로 만들어내는 거가 모여있음. 함수 자체가 인식되는 거다.
+    // 우리는 함수 표현식을 더 많이 쓴다. 그 이유는
+    //  자바스크립트는 인터프리트 언어임. 인터프리트는 순차적으로 표현되는 걸 말함
+
+    // let bbb = function () {
+    //   alert("bbb 함수");
+    // };
+  </script>
+</html>

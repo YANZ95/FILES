@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이미지변경</title>
+  </head>
+  <body>
+    <img id="image" src="../IMAGE/짱구.jpg" width="500" height="auto" />
+    <button onclick="chageImage()">눌러보세요</button> ;
+  </body>
+  <script>
+        function chageImages() {
+          //  사진 5장 정도를준비
+          // 사진의 경로를 배열에 담는다.
+          const imgArr = ["ehdro.jpg", "시바견.png", "토이푸들", ""];
+          //  클릭할 때마다 0 ~ 4의 랜덤 숫자를 뽑는다.
+          document.querySelector("#image").src = "../resources/img/우주1.jpeg";
+        }
+        function makeRandNum(length) {
+          const randNum = parseInt(Math.random() * length);
+    if(randNum !== lastIdx) {
+     lastIdx = randNum;
+        return randNum;
+    }
+
+        // 여기서 뽑는 랜덤숫자가 전에 뽑았던 숫자와 겹칠 경우에는 안 바뀌는 것처럼 보이는데
+        // 그러면 무한반복이 안되게 기억하게 만들자
+        // 그럴려면 브레이크 사용할 수 있는데 브레이크보다는
+  </script>
+</html>
