@@ -1,0 +1,85 @@
+#my-input {
+  width: 200px;
+  height: 30px;
+  font-size: 20px;
+}
+
+.events {
+  width: 333px;
+  height: 34px;
+  margin: 10px 0;
+  border: 1px solid #333333;
+  border-left: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.event {
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  border-left: 1px solid #333333;
+}
+
+.function-keys {
+  width: 700px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-keys {
+  width: 700px;
+  height: 300px;
+}
+
+.row {
+  display: flex;
+}
+
+.key {
+  width: 43px;
+  height: 43px;
+  border: 1px solid #333333;
+  border-radius: 3px;
+  margin: 1px;
+}
+
+#Backspace,
+#Tab {
+  width: 79px;
+}
+
+#CapsLock,
+#Enter {
+  width: 86px;
+}
+
+#ShiftLeft,
+#ShiftRight {
+  width: 110px;
+}
+
+#ControlLeft,
+#ControlRight,
+#AltLeft,
+#AltRight,
+#WinLeft {
+  width: 50px;
+}
+
+#Space {
+  width: 284px;
+}
+
+
+
+/* .은 무슨 선택자였나? */
+/* 일단 강사님이 말하는 걸 저어보자. 그러면 보더가 겹치지도 않고 
+잘만들어진 걸 보게 될거에요. 이제 여기보면은 일단 요 이벤츠 디아이브이들 작성다했죠?
+메인 키보드 아이디가 키보드인 녀석 작성을 해보죠.   */
+/* 왜 이렇게 하는 지 그걸 알아야됨  */
+/* 기본키의 높이 헤이트들을 작성해보죠. 저녀석들이 누군가 하면 
+클래스가 다들 키라고 되어있을겁니다. 그쵸? 키라는 애 먼저 써볼거에요. 
+위드 값과 헤이트 */
+플렉스 아이는 그 아이의 자손까지 영향을 미치는 것이 아니에요.자식들까지만 그러면 
+펑션의 자식들은 요 디아이브이의 자식들이 맞아요 그러면 요 자식들의 자식까지 겹쳐지는 거에요.
