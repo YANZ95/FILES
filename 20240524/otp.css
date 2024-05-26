@@ -1,0 +1,37 @@
+* {
+  margin: ;
+  padding: ;
+  box-sizing: border-box;
+  font-family: ;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-field input {
+  width: 42px;
+  height: 45px;
+  border-radius: 6px;
+  font-size: 1.15rem;
+  outline: none;
+  border: 1px solid addd;
+}
