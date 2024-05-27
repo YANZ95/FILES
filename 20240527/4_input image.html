@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>input image</title>
+    <script src="../resources/JS/jquery-3.6.4.js"></script>
+  </head>
+  <body>
+    <button>이미지추가</button>
+  </body>
+  <script>
+    const imgArr = [
+      "Cristiano Ronaldo.jpg",
+      "Eden Hazard.jpg",
+      "Paulo Dybala.jpg",
+      "Kevin De Bruyne.jpg",
+      "Lionel Messi.jpg",
+      "Neymar Jr.jpg",
+      "Thomas Muller.jpg",
+      "Luiz Suarez.jpg",
+      "Kylian Mbape.jpg",
+      "Mohamed Salah.jpg",
+      "Son_heungMin.jpg",
+    ];
+
+    $("button").on("click", function () {
+      const randNum = parseInt(Math.random() * 11);
+      const img = $(
+        `<img 
+        src="../IMAGE/Football Player/${imgArr[randNum]}"
+    width="200"
+    height="200"
+    />`
+      );
+      img.appendTo("body");
+    });
+  </script>
+</html>

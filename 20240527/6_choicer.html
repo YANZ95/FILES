@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선택자</title>
+    <script src="../resources/JS/jquery-3.6.4.js"></script>
+  </head>
+  <style></style>
+  <body>
+    <h2>
+      문단 안에 <a>앵커</a> 태그가 있다. 두번째 <span><a>앵커</a></span
+      >는 자손이다.
+    </h2>
+    <hr />
+    <div></div>
+  </body>
+  <script>
+    // // h2의 자식 a 태그의 테두리 설정 - solid
+    // document.querySelector("h2 > a").style.border = "2px solid red";
+    $("h2 > a").css("border", "2px solid black");
+    // // h2의 후손(자손) a 태그의 배경색을 노란색으로 변경
+    // document.querySelector("h2 span a").style.backgroundColor = "yellow";
+    $("h2 a").css("backgroundColor", "red");
+
+    // span 태그의 배경색 - yellow
+    $("span").css() <
+      // div의 모든 후손 중 span 태그의 테두리 - red
+
+      //  div의 바로 다음 자식 span 태그의 테두리 - blue
+
+      hr >
+      <p>형제 선택자에 대하여</p>;
+  </script>
+</html>

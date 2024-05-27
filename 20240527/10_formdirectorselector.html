@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form status selcetor</title>
+  </head>
+  <style></style>
+  <body>
+    <form>
+      <input type="text" name="id" /><br />
+      <input type="password" name="password" /><br />
+
+      <br /><br />
+      <input type="submit" value="전송" />
+      <input type="submit" value="전송" />
+    </form>
+  </body>
+  <script>
+    $(":disabled").css('border', 4px solid red);
+  </script>
+</html>
