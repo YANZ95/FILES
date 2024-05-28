@@ -39,7 +39,7 @@
       margin: 0;
     }
   </style>
-  <body>
+  <body onclick="alert">
     <!-- <div onclick="alert('div에 할당한 핸들러')">
       <em>
         <code>EM</code>을 클릭했는데도 <code>DIV</code>에 할당한 핸들러가
@@ -73,8 +73,8 @@
   <script>
     // h2[i] == e.target == this
     const form = document.querySelector("#form");
-    form.addEventListener("click", function () {
-      alert("click 이벤트 발생");
+    form.addEventListener("click", function (e) {
+      alert("target: ${e.target.tagName}, this ${}");
     });
   </script>
 </html>
