@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>부모요소 확인</title>
+    <script src="../resources/JS/jquery-3.6.4.js"></script>
+  </head>
+  <style>
+    div {
+      border: 3px solid orange;
+    }
+  </style>
+  <body>
+    <div>
+      <p>무궁화 꽃이 피었습니다.</p>
+    </div>
+
+    <p id="pTag">은주는 예쁘다~~~~~</p>
+    <div>
+      <p>사뿐히 즈려밟고 가시옵소서</p>
+    </div>
+  </body>
+  <script>
+        // // p 태그들에 클릭 이벤트를 달아준다.
+        // $(document).ready(function () {
+        //   $("p").on("click", function () {
+        //     $(this).css("color", "red");
+
+        //     // 선택된 p 태그의 부모 요소 가져오기
+        //     var parent = $(this).parent();
+
+        //     // 부모 요소의 태그 이름 가져오기
+        //     var parentTagName = parent.prop("tagName");
+
+        //     // 부모 요소가 div 태그인지 확인
+        //     if (parentTagName === "DIV") {
+        //       // 선택된 p 태그의 텍스트 가져오기
+        //       var pText = $(this).text();
+
+        //       // 새로운 p 태그를 생성하여 부모 요소에 추가
+        //       var newP = $("<p></p>")
+        //         .text(pText + " (새로운 텍스트)")
+        //         .css("color", "blue");
+        //       parent.append(newP);
+        //     } else {
+        //       // 부모 요소가 div 태그가 아니라면 경고 메시지 출력
+        //       alert("작업대상이 아닙니다.");
+        //     }
+        //   });
+        // });
+
+          // p 태그들에 클릭 이벤트를 달아준다.
+          $(document).on(function () {
+
+
+        // 선택된 부모요소의 div 태그는 클릭하면 빨간색으로 더 늘어남
+    const pTag = $(this);
+        // 선택된 p 태그를 가져온다. <div>
+    const parent = pTag.parent();
+        // 선택된 p 태그의 부모요소를 가져온다.
+        awdxssssssssssss
+        // 부모요소가 div 태그인지 확인한다.
+
+        // 부모요소가 div 태그라면 선택된 p 태그의 텍스트를 가져온다.
+
+        // 새로운 p 태그를 생성하여 부모요소에 추가한다.(폰트색상 변경)
+
+        // 부모요소가 div 태그가 아니라면 "작업대상이 아닙니다." 라는 문구를 출력(alert)
+  </script>
+</html>

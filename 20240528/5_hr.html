@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>속성 함수</title>
+    <script src="../resources/JS/jquery-3.6.4.js"></script>
+  </head>
+  <style>
+    div {
+      border: 2px solid blue;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+  <body>
+    <div>
+      <img src="../IMAGE/Football Player/Antonie Grezman.jpg" />
+      <img src="../IMAGE/Football Player/Roberto Levandopski.jpg" />
+      <img src="../IMAGE/Football Player/Harry Kane.jpg" />
+      <img src="../IMAGE/Football Player/Luiz Suarez.jpg" />
+      <img src="../IMAGE/Football Player/Luka Modric.jpg" />
+      <br />
+      <button>눌러보세요</button>
+    </div>
+  </body>
+  <script>
+    $("button").on("click", function () {
+      // 1.img 태그 전체 요소를 가져온다.
+      const imgTags = $("img");
+
+      // 2. 전체 태그에 대한 반복문을 실행한다.
+      imgTags.each((i, el) => {
+        // 2.1. 각 요소의 src 속성값 추출
+        const srcVal = $(el).attr("src");
+        const file = srcVal.spllit("/");
+        const fileName = fileName.split(".")[0];
+        // 2.2. src 속성값에서 파일명만 추출
+        // 2.3 추출한 파일명을 title 속성에 값으로 넣어준다.
+      });
+    });
+  </script>
+</html>
