@@ -7,20 +7,21 @@
     <script src="../resources/JS/jquery-3.6.4.js"></script>
 </head>
 <body>
-    <input type="checkbox" id="check1"/>
+    <input type="checkbox" id="check1" checked />
     <label for="check1">CHECK1</label>
-    <input type="checkbox" id="check1">
-    <label for="check2">CHECK1</labe2>
-
+    <input type="checkbox" id="check2">
+    <label for="check2">CHECK2</labe2>
+<input type="text" readonly />
 </body>
 <script>
 const attrVal = $('#check1').attr("checked");
 const propVal = $("check1").prop("checked");
-console.log('attrVal: ${attrVal}, propVal: ${propVal}');
+console.log(`attrVal: ${attrVal}, propVal: ${propVal}`);
 const attrVal2 = $('#check2').attr("checked");
-const propVal2 = $("check2").prop("checked");
-console.log('attrVal: ${attrVal2}, propVal: ${propVal2}');
+const propVal2 = $("#check2").prop("checked");
+console.log(`attrVal2: ${attrVal2}, propVal2: ${propVal2}`);
 console.log(typeof propVal);
-// prop 함수들 사용하면 좋은 속성들 보충 -----
+ // prop 함수를 사용하면 좋은 속성들
+    // checked, selected, disabled, readonly
 </script>
 </html>
