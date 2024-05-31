@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>타이핑 게임 연습1</title>
+  </head>
+  <body>
+    <div id="container">
+      <inpput id="input" type="text" placeholder="단어를 입력하세요." />
+    </div>
+    <div class="score">총점:0</div>
+  </body>
+  <script>
+    const words = [
+      "DW",
+      "JavaScript",
+      "DOM",
+      "BOM",
+      "document",
+      "window",
+      "Event",
+    ];
+
+    const input = document.querySelector("#input");
+    const scorePanel = document.querySelector(".score");
+    let count = 0;
+    let score = 0;
+
+    const container = document.querySelector("#container");
+    console.log(
+      "offsetWidth: ${container, offsetWidth}, offsetHeight: ${container.offsetHeight}"
+    );
+    const maxPositionX = container.offsetWidth - 90;
+  </script>
+</html>
