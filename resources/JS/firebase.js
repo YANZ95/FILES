@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   addDoc,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -38,11 +39,16 @@ async function addDatas(collectionName, dataObj) {
 
     // 문서 ID 자동
     const collect = await collection(db, collectionName);
-    await addDoc(collect, dataObj);
+    await addDoc(collect, dataObj); // 결과 == undefined
     return true;
   } catch (error) {
     return false;
   }
 }
 
-export { db, getDatas, addDatas };
+async function deleteDatas(collectionName, docId) {
+  const docRef = await doc(db, collectionName, docId);
+  await deleteDoc(docRef);
+}
+
+export { db, getDatas, addDatas, deleteDatas };
