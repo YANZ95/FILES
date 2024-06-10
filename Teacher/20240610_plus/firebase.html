@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파이어베이스 리마인드</title>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+  </head>
+  <body></body>
+  <script>
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBvTXz44Ces9I6If9sAIKjBL26pvA0afMQ',
+      authDomain: 'myproject-3ce22.firebaseapp.com',
+      projectId: 'myproject-3ce22',
+      storageBucket: 'myproject-3ce22.appspot.com',
+      messagingSenderId: '593562857913',
+      appId: '1:593562857913:web:a079c42f60c07e3f190668',
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    async function getDatas(collectionName) {
+        const querySnapshot = db.collection(collectionName).get();
+    }
+
+    db.collection('member')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+        });
+      });
+  </script>
+</html>

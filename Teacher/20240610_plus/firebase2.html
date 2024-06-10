@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파이어베이스 리마인드</title>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="./firebase.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <table border="1">
+        <tr>
+          <th>이름</th>
+          <th>성별</th>
+          <th>나이</th>
+          <th>주소</th>
+          <th>전화번호</th>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    async function getMembers() {
+      const querySnapshot = await getDatas('member');
+      const tableTag = document.querySelector('table');
+      querySnapshot.forEach((doc) => {
+        const { name, age, tel, gender, email } = doc.data();
+        tableTag.insertAdjacentHTML(
+          'beforeend',
+          `
+            <tr>
+                <td>${name}</td>
+                <td>${gender}</td>
+                <td>${age}</td>
+                <td>${email}</td>
+                <td>${tel}</td>
+            </tr>
+        `
+        );
+      });
+    }
+
+    getMembers();
+  </script>
+</html>
