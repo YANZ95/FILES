@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI Coding introduce</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        background-image: url('resources/img/into-image.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: 'ONE-Mobile-POP', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        overflow: auto;
+      }
+      @font-face {
+        font-family: 'ONE-Mobile-POP';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff')
+          format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+      .house {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background: white;
+        gap: 60px;
+        border-radius: 50px;
+        padding: 40px; /* 내부 여백을 늘림 */
+        width: 100%; /* 너비를 늘림 */
+        height: auto; /* 높이를 자동 조절 */
+        max-width: 1500px; /* 최대 너비를 설정 */
+      }
+      .part {
+        color: black;
+        font-size: 20px;
+        margin: 0 20px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      h2,
+      h3,
+      p {
+        margin: 0;
+        padding: 10px 0;
+      }
+      .section-image {
+        width: 300px;
+        height: auto;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="house">
+      <div class="one-part part">
+        <img src="/resources/img/into-one-part.jpg" class="section-image" />
+        <h2>유아 코딩 교육의 중요성</h2>
+        <h3>창의력과 논리력 향상</h3>
+        <p>
+          디지털 시대에 접어들면서 코딩 교육은 필수가 되었습니다. 유아기 코딩
+          <br />
+          교육은 창의력과 사고력을 키우는 데 큰 도움을 줍니다.
+          <br />
+        </p>
+      </div>
+      <div class="two-part part">
+        <img src="/resources/img/into-two-part.jpg" class="section-image" />
+        <h2>왜 저희 프로그램이어야 될까요?</h2>
+        <h3>흥미로운 학습 환경</h3>
+        <p>
+          맞춤형 커리큘럼을 제공하며, 문제를 해
+          <br />
+          결하는 능력을 키워줍니다. 지금 가입
+          <br />
+          하시면 7일간 무료 체험을 제공합니다.
+          <br />
+        </p>
+      </div>
+      <div class="thr-part part">
+        <img src="/resources/img/into-three-part.jpg" class="section-image" />
+        <h2>부모님들의 적극적인 참여와 지원</h2>
+        <h3>부모님의 역할과 지원 방법</h3>
+        <p>
+          부모님이 자녀의 학습을 따라갈 수
+          <br />
+          있도록 지원합니다. 또한,도움을 줄
+          <br />
+          수 있는 가이드를 제공합니다.
+          <br />
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
