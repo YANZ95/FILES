@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 연습 - var 예약어에 대하여~ </title>
+</head>
+<body>
+   
+</body>
+<script>
+//     0번 - 두 수를 더하는 함수 만들기 
+//    function addNumber(a,b) {
+//     var sum = a+b;
+//     alert(sum);
+//    }
+// function addNumber(125, 698) {
+//     var sum = 125 + 698;
+//     alert(sum);
+// }
+// addNumber(125,698) -> 함수 선언식에 숫자를 직접 도입해서 
+// 실행이 안 됬음
+
+// function addNumber(a, b) {  // 매개변수로 a와 b를 사용합니다.
+//     var sum = a + b;  // a와 b를 더해서 sum에 저장합니다.
+//     alert(sum);  // sum의 값을 경고창으로 표시합니다.
+// }
+// addNumber(125, 698);  // 함수를 호출하면서 125와 698을 전달합니다.
+
+// 기본 함수명
+// function 함수명() {
+//  명령
+// }
+
+   // 1번 함수를 사용하지 않고 두 수 더하기
+    //  var num1 = 1;
+    //     var num2 = 2;
+    //     var sum = num1 + num2;
+    //     alert("결과값:" + sum);
+
+    // // 2번 함수를 사용해 두 수 더하기
+//     function addNumber () {
+//         var num1 = 1;
+//         var num2 = 2;
+//         var sum = num1 + num2;
+//            alert("결과값:" + sum);
+//     }
+//     addNumber();
+// addNumber();
+
+    // 3번 var 예약어로 지역 변수 선언하기
+    // function addNumber () {
+    //     var sum = 10 + 20; // 지역 변수 선언 
+    // }
+    // addNumber(); // 여기까지 사용하면 맞는 식이다.
+    // console.log(sum); // console. log 안에 지역 변수를 입력
+// sum은 addNumber() 안에서 발생한 함수인데 console.log()에서 사용해 오류가 발생함
+//  -> 지역변수는 함수 안에서만 사용이 가능함
+// function addNumber() {
+//     var sum = 10 + 20;
+// }
+// addNumber(sum);
+// var sum 아래 console. log 도입 안 해서 오류남
+//  이거 아니면 return 함수 써야됨
+
+//  4번 var 예약어를 사용한 지역 변수와 전역 변수
+// function addNumber() {
+//     var sum = 10 + 20; // 지역 변수 확인
+//     multi = 10 * 20; // 전역 변수 확인
+// }
+// addNumber();
+// console. log(multi); // 전역 변수를 사용
+//  함수 선언식 안에서 함수 앞에 예약어 var을 붙이고 사용하면 지역 변수가 되고
+//  함수 앞에 var을 안 붙이면 전역 함수가 된다.
+
+// 5번 - 호이스팅
+// var x = 10;
+
+// function displayNumber() {
+//     console.log("x is" +x);
+//     console.log("y is" +y);
+//     var y = 20;
+// }
+// displayNumber();
+
+// 6번  변수의 재선언과 재할당
+// function addNumber(num1, num2) {
+//     return num1 + num2; // 2개의 수 더하기
+// }
+// var sum = addNumber(10, 20);  // sum 변수 선언, 함수 호출
+// console.log(sum);
+// sum = 50;               // sum 변수 재할당
+// console.log(sum);
+// var sum = 100;    // sum 변수 재선언 
+// console. log(sum);
+
+
+
+</script>
+</html>
