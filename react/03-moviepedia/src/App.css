@@ -9,6 +9,7 @@
   padding: 15px 20px;
   border: 1px solid #f9f9f9;
   border-radius: 6px;
+  outline: none;
   font-size: 16px;
   background-color: #f9f9f9;
   font-family: sans-serif;
@@ -39,6 +40,9 @@
   color: #fff;
   background-color: #000;
 }
+.AppSortButton:not(.selected) {
+  cursor: pointer;
+}
 .App .App-nav,
 .App .App-footer {
   flex: none;
@@ -51,8 +55,8 @@
   background-color: #fff;
   border-bottom: 1px solid #e2e2e2;
 }
-.App-container,
 .App-nav-container,
+.App-container,
 .App-footer-container {
   width: 100%;
   max-width: 860px;
@@ -70,17 +74,17 @@
   padding: 30px;
   background-image: url("./assets/ticket.png");
   background-repeat: no-repeat;
-  background-position: center-top;
+  background-position: center top;
   background-size: cover;
   border-radius: 5px;
   filter: drop-shadow(0 0 11px rgba(105, 105, 105, 0.2));
-  /* box-shadow: 0 0 11px; */
+  /* box-shadow: 0 0 11px rgba(105, 105, 105, 0.2); */
 }
 .App-ReviewList {
   padding: 30px 30px 0;
   border-radius: 5px;
   box-shadow: 0 0 11px rgba(105, 105, 105, 0.2);
-  background-color: rgba;
+  background-color: #fff;
 }
 .App-load-more-button {
   width: 100%;
@@ -90,6 +94,7 @@
   border: none;
   cursor: pointer;
 }
+
 .App-footer {
   background-color: #000;
 }

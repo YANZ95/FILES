@@ -7,6 +7,12 @@ import {
   doc,
   addDoc,
   deleteDoc,
+  getDoc,
+  updateDoc,
+  query,
+  orderBy,
+  limit,
+  startAfter,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -33,6 +39,43 @@ async function getDatas(collectionName) {
   return resultData;
 }
 
+async function getDatasByOrder(collectionName, options) {
+  const collect = await collection(db, collectionName);
+  // const q = query(컬렉션정보, 조건1, 조건2, 조건3...);
+  const q = query(collect, orderBy(options.order, "desc"));
+  const snapshot = await getDocs(q);
+  const resultData = snapshot.docs.map((doc) => ({
+    docId: doc.id,
+    ...doc.data(),
+  }));
+
+  return resultData;
+}
+
+async function getDatasByOrderLimit(collectionName, options) {
+  const collect = await collection(db, collectionName);
+  let q;
+  if (options.lq) {
+    q = query(
+      collect,
+      orderBy(options.order, "desc"),
+      startAfter(options.lq),
+      limit(options.limit)
+    );
+  } else {
+    q = query(collect, orderBy(options.order, "desc"), limit(options.limit));
+  }
+  const snapshot = await getDocs(q);
+  const lastQuery = snapshot.docs[snapshot.docs.length - 1];
+  console.log(lastQuery);
+  const resultData = snapshot.docs.map((doc) => ({
+    docId: doc.id,
+    ...doc.data(),
+  }));
+
+  return { resultData, lastQuery };
+}
+
 async function addDatas(collectionName, dataObj) {
   try {
     // 문서 ID 수동
@@ -55,4 +98,18 @@ async function deleteDatas(collectionName, docId) {
   await deleteDoc(docRef);
 }
 
-export { db, getDatas, addDatas, deleteDatas };
+async function updateDatas(collectionName, docId, updateInfoObj) {
+  const docRef = await doc(db, collectionName, docId);
+  // const docData = await getDoc(docRef);
+  await updateDoc(docRef, updateInfoObj);
+}
+
+export {
+  db,
+  getDatas,
+  addDatas,
+  deleteDatas,
+  updateDatas,
+  getDatasByOrder,
+  getDatasByOrderLimit,
+};
