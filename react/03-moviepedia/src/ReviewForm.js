@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import FileInput from "./FileInput";
 import RatingInput from "./RatingInput";
 import "./ReviewForm.css";
+import Rating from "./Rating";
 
-function ReviewForm(props) {
-  const [values, setValues] = useState({});
+const INITIAL_VALUE = {
+  title: "",
+  Rating: 0,
+  content: "",
+  imgUrl: null,
+};
+
+function ReviewForm({ addData, handleAddSuccess }) {
+  const [values, setValues] = useState({ INITIAL_VALUE });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name, value) => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -13,11 +22,24 @@ function ReviewForm(props) {
     const { name, value } = e.target;
     handleChange(name, value);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // 버튼 비활성화
+    setIsSubmitting(true);
+    const result = await addData("movie", values);
+    handleAddSuccess(result);
+    setIsSubmitting(false);
+    setValues(INITIAL_VALUE);
+  };
 
   return (
-    <form className="ReviewForm">
+    <form className="ReviewForm" onSubmit={handleSubmit}>
       <div>
-        <FileInput name="imgUrl" setFile={handleChange} />
+        <FileInput
+          inputName="imgUrl"
+          setFile={handleChange}
+          value={values.imgUrl}
+        />
       </div>
       <div className="Form-container">
         <input
@@ -26,13 +48,15 @@ function ReviewForm(props) {
           placeholder="제목을 입력해주세요."
           onChange={handleInputChange}
         />
-        <RatingInput />
+        <RatingInput inputName="rating" setRating={handleChange} />
         <textarea
           name="content"
           placeholder="내용을 입력해주세요."
           onChange={handleInputChange}
         />
-        <button>확인</button>
+        <button type="submit" disabled={isSubmitting}>
+          확인
+        </button>
       </div>
     </form>
   );

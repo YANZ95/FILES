@@ -12,7 +12,7 @@
   object-fit: cover;
   object-position: center;
 }
-.FileInput.hidden-overlay {
+.FileInput-hidden-overlay {
   position: absolute;
   top: 0;
   left: 0;
