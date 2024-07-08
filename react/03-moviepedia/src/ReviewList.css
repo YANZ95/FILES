@@ -22,7 +22,7 @@
   font-size: 20px;
 }
 .ReviewListItem-rows .ReviewListItem-rating {
-  margin: 8px;
+  margin-bottom: 8px;
 }
 .ReviewListItem-rows .ReviewListItem-date {
   margin: 0 0 5px;
@@ -35,6 +35,7 @@
   margin: 0 0 5px;
   overflow: hidden;
   color: #545357;
+  font-size: 16px;
   letter-spacing: -0.2px;
 }
 .ReviewListItem-rows .ReviewListItem-buttons {
@@ -53,15 +54,16 @@
 .ReviewListItem-delete-button {
   color: #ff0023;
 }
+
 .ReviewList {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 .ReviewList > li {
-  padding: 30px 0;
-  border-bottom: 1px dashed #c5c5c5;
+    padding: 30px 0;
+    border-bottom: 1px dashed #c5c5c5;
 }
 .ReviewList > li:first-child {
-  padding-top: 0;
+    padding-top: 0;
 }

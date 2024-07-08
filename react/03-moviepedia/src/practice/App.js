@@ -1,5 +1,5 @@
-import React from "react";
-import State from "practice/State";
+import React from 'react';
+import State from './State';
 
 function App(props) {
   return <State />;

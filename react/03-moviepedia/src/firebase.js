@@ -21,6 +21,7 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+
 const firebaseConfig = {
   apiKey: "AIzaSyC6gyhP6B8b6iEhSSxukLLCPJqARu_fmr0",
   authDomain: "moviepedia-24d73.firebaseapp.com",
@@ -87,6 +88,7 @@ async function addDatas(collectionName, dataObj) {
     const uuid = crypto.randomUUID();
     const path = `movie/${uuid}`;
     const url = await uploadImage(path, dataObj.imgUrl);
+
     dataObj.imgUrl = url;
     // createdAt, updatedAt ==> 현재 날짜 밀리세컨즈로 바꿔서
     const time = new Date().getTime();
@@ -97,18 +99,13 @@ async function addDatas(collectionName, dataObj) {
     const lastId = await getLastNum(collectionName, "id");
     dataObj.id = lastId + 1;
 
-    // 문서 ID 수동
-    // const saveDoc = await doc(db, collectionName, '3');
-    // console.log(`doc() 결과: ${saveDoc}`);
-    // const saveResult = await setDoc(saveDoc, dataObj);
-    // console.log(`setDoc() 결과: ${saveResult}`);
-
     // 문서 ID 자동
     const collect = await collection(db, collectionName);
     const result = await addDoc(collect, dataObj);
-    const docSnap = await getDoc(result); // Result == > documentReference
+    const docSnap = await getDoc(result); // result == > documentReference
 
     const resultData = { ...docSnap.data(), docId: docSnap.id };
+
     return resultData;
   } catch (error) {
     return false;
@@ -141,8 +138,9 @@ async function uploadImage(path, imgFile) {
 async function deleteDatas(collectionName, docId, imgUrl) {
   // 1. 스토리지 객체 가져온다.
   const storage = getStorage();
+
   try {
-    // 2.스토리지에서 이미지 삭제
+    // 2. 스토리지에서 이미지 삭제
     const deleteRef = ref(storage, imgUrl);
     await deleteObject(deleteRef);
     // 3. 컬렉션에서 문서 삭제
@@ -154,10 +152,36 @@ async function deleteDatas(collectionName, docId, imgUrl) {
   }
 }
 
-async function updateDatas(collectionName, docId, updateInfoObj) {
+async function updateDatas(collectionName, dataObj, docId) {
+  // console.log(imgUrl);
+  console.log(dataObj.imgUrl);
   const docRef = await doc(db, collectionName, docId);
-  // const docData = await getDoc(docRef);
-  await updateDoc(docRef, updateInfoObj);
+  // 수정할 데이터 양식 생성 => title, content, rating, updatedAt, imgUrl
+  const time = new Date().getTime();
+  dataObj.updatedAt = time;
+  // 사진파일이 수정되면 => 기존사진 삭제 => 새로운사진 추가 => url 받아와서 imgUrl 값 셋팅
+  if (dataObj.imgUrl !== null) {
+    // 기존사진 url 가져오기
+    const docSnap = await getDoc(docRef);
+    const prevImgUrl = docSnap.data().imgUrl;
+    // 스토리지에서 기존사진 삭제
+    const storage = getStorage();
+    const deleteRef = ref(storage, prevImgUrl);
+    await deleteObject(deleteRef);
+    // 새로운사진 추가
+    const uuid = crypto.randomUUID();
+    const path = `movie/${uuid}`;
+    const url = await uploadImage(path, dataObj.imgUrl);
+    dataObj.imgUrl = url;
+  } else {
+    // imgUrl 프로퍼티 삭제
+    delete dataObj["imgUrl"];
+  }
+  // 사진파일이 수정되지 않으면 => 변경데이터만 업데이트
+  await updateDoc(docRef, dataObj);
+  const updatedData = await getDoc(docRef);
+  const resultData = { docId: updatedData.id, ...updatedData.data() };
+  return resultData;
 }
 
 export {

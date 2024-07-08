@@ -40,7 +40,7 @@
   color: #fff;
   background-color: #000;
 }
-.AppSortButton:not(.selected) {
+.AppSortButton:not(.selected){
   cursor: pointer;
 }
 .App .App-nav,
@@ -72,7 +72,7 @@
 }
 .App-ReviewForm {
   padding: 30px;
-  background-image: url("./assets/ticket.png");
+  background-image: url('./assets/ticket.png');
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
