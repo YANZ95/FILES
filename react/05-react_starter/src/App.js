@@ -1,5 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import Cleanup from "./Cleanup";
+import ToDoList from "./ToDoList";
+import MovieApp from "./MovieApp";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,16 +19,20 @@ function App() {
   }, []); //[](디펜던시 리스트) 안에는 react 가 무엇을 지켜볼 지 작성해준다.
   useEffect(() => {
     console.log("나는 count가 변경될때 실행되는 uef야.");
-  }, [count, inputValue]);
+  }, [count]);
   useEffect(() => {
     console.log("나는 inputValue가 변경될때 실행되는 uef야.");
   }, [inputValue]);
   return (
     <>
-      <input type="text" placeholder="Search here" onChange={handleChange} />
+      {/* <input type="text" placeholder="Search here" onChange={handleChange} />
       <h2>입력한 값 : {inputValue}</h2>
       <h1>{count}</h1>
       <button onClick={handleClick}>Click me</button>
+      <hr />
+      <Cleanup />
+      <hr /> */}
+      <MovieApp />
     </>
   );
 }
