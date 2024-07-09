@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>var 예약어를 사용한 지역 변수와 전역 변수 (519p)</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function addNumber() {
+        var sum = 10 + 20; // 지역 변수 선언
+        multi = 10 + 20; // 전역 변수 선언
+    }
+    addNumber();
+    console.log(multi); // 전역 변수를 사용
+</script>
+</html>
