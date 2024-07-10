@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재할당할 수 없는 const 변수 (528P)</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const currentYear = 2020;
+    console.log(currentYear);
+    currentYear = 2100; // currentYear 변수 재할당 
+    console.log(currentYear);
+    // 변수에 새로운 값을 할당을 하려고 하였으나 const 변수 특성상 불가하여
+    // Assignment to constant variable. at 39_const-2.html:52:17 이라는 문구가
+    // 떳다.
+</script>
+</html>

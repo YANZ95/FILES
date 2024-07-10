@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재선언할 수 없는 const 변수 (527p)</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const currentYear = 2020;
+    console.log(currentYear);
+    const currentYear; // currentYear 변수 재선언 
+    //  콘솔 창에서 확인하면 변수 재선언할 수 없다는 오류 메세지인
+    // Identifier 'currentYear' has already been declared 라는 문구가 나온다.
+</script>
+</html>
