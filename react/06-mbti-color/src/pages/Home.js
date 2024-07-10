@@ -1,9 +1,25 @@
-import React from 'react';
-import styles from './Home.module.css';
-import { Link } from 'react-router-dom';
-import ColorSurvey from '../components/ColorSurvey';
+import React, { useEffect, useState } from "react";
+import styles from "./Home.module.css";
+import { Link } from "react-router-dom";
+import ColorSurvey from "../components/ColorSurvey";
+import mockItems from "../lib/mock.json";
+import { getAllDatas } from "./firebase";
 
 function Home(props) {
+  // const itemState = useState([]);
+  // const items = itemState[0];
+  // const setItems = itemState[1];
+  const [items, setItems] = useState([]);
+  const handleLoad = async () => {
+    // 파이어베이스에서 데이터 가져오기
+    const resultData = await getAllDatas("mbtiColor", "id");
+    // item state에 셋팅
+    setItems(resultData);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -15,17 +31,19 @@ function Home(props) {
           </h1>
           <div>
             <div className={styles.filter}>
-              <img className={styles.removeIcon} src='/images/x.svg' />
+              <img className={styles.removeIcon} src="/images/x.svg" />
             </div>
           </div>
         </header>
       </div>
       <main className={styles.content}>
-        <Link className={styles.addItem} to='/new'>
+        <Link className={styles.addItem} to="/new">
           + 새 컬러 등록하기
         </Link>
         <ul className={styles.items}>
-          <ColorSurvey />
+          {items.map((item, idx) => {
+            return <ColorSurvey key={idx} mbtiData={item} />;
+          })}
         </ul>
       </main>
     </div>
