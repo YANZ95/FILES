@@ -16,9 +16,9 @@ function App() {
         <Link to="03">
           <li>3. 연습1</li>
         </Link>
-        <Link to="04">
+        {/* <Link to="04">
           <li>4. 연습2</li>
-        </Link>
+        </Link> */}
       </ul>
       <Outlet />
     </>

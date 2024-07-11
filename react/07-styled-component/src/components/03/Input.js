@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Input = styled.input`
   border: 2px solid #eee;
@@ -7,7 +7,7 @@ const Input = styled.input`
   padding: 16px;
 
   &:focus {
-    border-radius: 50px;
+    border-color: #7760b4;
   }
 `;
 
