@@ -4,7 +4,13 @@ import App from "./components/App";
 import HelloStyled from "./components/01/HelloStyled";
 import Nesting from "./components/02/Nesting";
 import { Practice as Practice1 } from "./components/03/Practice";
-// import { Practice as Practice2 } from "./components/04/Practice";
+import DynamicStyling from "./components/04/DynamicStyling";
+import { Practice as Practice2 } from "./components/05/Practice";
+import Inheritance from "./components/06/Inheritance";
+import Reuse from "./components/07/Reuse";
+import { Practice as Practice3 } from "./components/08/Practice";
+import Login from "./components/09/Login";
+
 function Main(props) {
   return (
     <div>
@@ -14,12 +20,12 @@ function Main(props) {
             <Route path="01" element={<HelloStyled />} />
             <Route path="02" element={<Nesting />} />
             <Route path="03" element={<Practice1 />} />
-            {/* <Route path="04" element={<pracice2 />} /> */}
-            {/*     <Route path="05" element={} /> */}
-            {/*     <Route path="06" element={} /> */}
-            {/*     <Route path="07" element={} /> */}
-            {/*     <Route path="08" element={} /> */}
-            {/*     <Route path="09" element={} /> */}
+            <Route path="04" element={<DynamicStyling />} />
+            <Route path="05" element={<Practice2 />} />
+            <Route path="06" element={<Inheritance />} />
+            <Route path="07" element={<Reuse />} />
+            <Route path="08" element={<Practice3 />} />
+            <Route path="09" element={<Login />} />
             {/*     <Route path="10" element={} /> */}
           </Route>
         </Routes>
