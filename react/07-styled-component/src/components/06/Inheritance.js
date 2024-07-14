@@ -20,15 +20,13 @@ const SubmitButton = styled(Button)`
   &:hover {
     background-color: #f5070f;
   }
-
-  //hover background-color: #f5070f;
 `;
 
 function Inheritance(props) {
   return (
     <div>
       <TermsOfService />
-      <Button>계속하기</Button>
+      <SubmitButton>계속하기</SubmitButton>
     </div>
   );
 }
