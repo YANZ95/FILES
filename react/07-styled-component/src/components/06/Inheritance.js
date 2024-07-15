@@ -25,7 +25,7 @@ const SubmitButton = styled(Button)`
 function Inheritance(props) {
   return (
     <div>
-      <TermsOfService />
+      <StyledTermsOfService />
       <SubmitButton>계속하기</SubmitButton>
     </div>
   );
