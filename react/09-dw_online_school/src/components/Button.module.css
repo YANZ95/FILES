@@ -1,0 +1,13 @@
+.button {
+  padding: 13px 14px;
+  /*   버튼 내부 공간 확장 -> 버튼 크게 만듬 */
+  font-size: 16px;
+  font-weight: 700;
+  /* 버튼 두껍게 만듬 */
+  color: #fff;
+  cursor: pointer;
+  background-color: #494949;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}

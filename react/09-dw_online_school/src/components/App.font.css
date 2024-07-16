@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "GmarketSans";
+  /* 지마켓산스미디움은 미디움만 써서 지워버림 */
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap");
+/* 이런 건 다운받는 게 좋은데 배포가 안 됨. 배포까지 해야 되는 프로젝트이면 폰트 다 다운받아 쓰는 것이 좋음 */
+
+:root {
+  --gamrket-sans: "Gmarket Sans";
+  --noto-sans: -apple-system, "Noto Sans KR", sans-serif 300 500 700;
+}
+
+html {
+  font-family: var(--noto-sans);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+a,
+h1,
+h2,
+h3,
+h4,
+button {
+  font-family: var(--gamrket-sans);
+  font-weight: 500;
+}

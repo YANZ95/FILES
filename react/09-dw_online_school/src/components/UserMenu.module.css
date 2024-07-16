@@ -1,0 +1,67 @@
+.userMenu {
+  /* position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column; */
+  /* 위에는 내가 한거  */
+  position: relative;
+}
+.iconButton {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+.userMenu,
+.iconButton,
+.iconButton img {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: grid;
+  text-decoration: none;
+}
+ul.popup {
+  /* 제일 작성 많이 되야 될 부분 */
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  /* z-index: 0; */
+  /* text-decoration: none;
+  position: relative;
+  z-index: 2; */
+  /* 내가 한거 위에 */
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  /* top: 25px; */
+  /* 얘가 살짝 올라옴 */
+  top: calc(100% + 25px);
+  /* 앱솔루트 백퍼센트 찼다. 유저메뉴 기준으로 움직이고 있다. 그녀석의 높이
+  값을 얘가 쓰는 거임. 25px을 추가적으로 해서 떨어뜨린다. 유저의 헤이트 값이 
+  달라져도 그만큼 움직일 거임. */
+  list-style: none;
+  right: -10px;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px 0 5px 5px;
+  /* 왼쪽 위부터 오른쪽 위 오른쪽 아래 왼쪽 아래 */
+  z-index: 1;
+  /* 아까 아이콘에 0줘서 그거보단 크게 줘야됨 */
+  width: 130px;
+  /* 이거 주니까 세로에서 가로모양으로 바뀜 */
+}
+ul.popup li {
+  padding: 15px 19px;
+  font-family: var(--noto-sans);
+}
+ul.popup li:hover {
+  background-color: #f4f4f4;
+}
+ul.popup li.disabled {
+  background-color: #fff;
+  color: #c4c4c4;
+  user-select: none;
+  /* 선택 안 되게 만드는 거 */
+}
+.userMenu ul.popup a:hover {
+  text-decoration: none;
+}

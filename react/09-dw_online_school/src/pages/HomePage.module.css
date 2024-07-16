@@ -1,0 +1,71 @@
+.bg {
+  /* background: #f9f9f9, #ebebeb; */
+  background: linear-gradient(
+    135deg,
+    #f9f9f9 48%,
+    #ebebeb 48% 78%,
+    #f9f9f9 78%
+  );
+  /* 뒤에 50% 50% 두개의 합이 100% 되면 됨 */
+  /* #f9f9f9 50%, #ebebeb 50% 60% 50%부터 60%까지 다른 색깔 나온다. 오른쪽 가면서 점점 이미해짐 */
+  /* 간단하게 생각하면 #f9f9f9 48%, #ebebeb 48% 78% f9f9f9 78% 48%부터 같은 색깔이 나왔다. */
+  /* height: 100; */
+  /* 헤이트 쓰려면 바디 릴레이티브에 다른 것도 설정해야됨  */
+  /* 전체 꽉차게 넓히는 방법은 배웠는데 그게 바로 inset임*/
+  position: absolute;
+  /* 그 상위 요소를 기본으로 하니까 가장 가까운 녀석을 기준으로 하는 게 앱솔루트 */
+  inset: 0;
+  z-index: 0;
+  /* z-index 안 넣으면 가려져서 안 보일 거임 */
+}
+.container {
+  display: flex;
+  /* justify-content: center; */
+  /* margin-top: 5%; */
+  margin: 120px auto 226px;
+  /* position: absolute; */
+  /* 이거 내가 넣은 거 */
+}
+.texts {
+  /* 헤딩 설정하고 글자 배열 설정, 버튼 설정 */
+  /* background-color: #ebebeb; */
+  /* display: grid; */
+  display: flex;
+  /* justify-content: center; */
+  flex: 1 1;
+  /* 그로우 1 쉬링크 1 이라는 내용 */
+  flex-direction: column;
+  justify-content: center;
+  /* 이미지 가운데쪽으로 내려올 수 있게 설정 */
+  margin-right: 100px;
+}
+.heading {
+  margin: 15px 0;
+  font-weight: 500;
+}
+
+.heading > span {
+  box-shadow: inset 0 -14px #ebebeb;
+  padding-bottom: 4px;
+  /* 밑줄이 글씨를 너무 침범하는 것 같아서 -14px 줄이는 것보다는 글씨를 올리는 게 좋을 것 같아서
+패딩 바텀을 설정함  */
+}
+.description {
+  color: #878787;
+  margin: 15px 0 25px;
+  font-size: 18px;
+  text-align: left;
+}
+/* .logo > span {
+  background-color: #878787;
+  color: #515151;
+} */
+.figure {
+  padding: 20px;
+  flex: 1 1;
+  text-align: center;
+}
+.figure img {
+  max-width: 418px;
+  width: 100%;
+}
