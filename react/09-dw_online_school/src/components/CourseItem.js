@@ -8,7 +8,7 @@ import getCourseColor from "../utils/getCourseColor";
 const DIFFICULTY = ["입문", "초급", "중급", "고급"];
 
 function CourseItem({ course }) {
-  const { title, summary, Language, difficulty, code, photoUrl } = course;
+  const { title, summary, language, difficulty, code, photoUrl } = course;
   const courseColor = getCourseColor(code);
   const thumbStyle = {
     borderColor: courseColor,
@@ -35,7 +35,7 @@ function CourseItem({ course }) {
         <div>
           <ul className={styles.tags}>
             {/* <li>PYHTHON</li> */}
-            <li>{Language}</li>
+            <li>{language}</li>
             <li>{DIFFICULTY[difficulty]}</li>
           </ul>
         </div>
