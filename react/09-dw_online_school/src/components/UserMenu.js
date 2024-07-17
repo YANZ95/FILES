@@ -41,9 +41,8 @@ function UserMenu(props) {
   //   윈도우 객체에 클릭이 들어감
 
   return (
-    <div className={styles.bg}>
+    <div className={styles.userMenu}>
       {/* 핸들러 작성했을때 핸드러 변경하는 버튼 작성해보기 */}
-      {/* 어떻게 작성해야 될지 모르겠다!!!!!!!! */}
       <button className={styles.iconButton} onClick={handleClick}>
         {/* 조건부 렌더링하는 만큼 넣어줬다. 논리 연산자 - 펄시한 값이 아니다~ */}
         <img src={personImg} />

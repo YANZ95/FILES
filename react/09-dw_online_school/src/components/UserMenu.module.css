@@ -17,9 +17,9 @@
 .iconButton img {
   width: 30px;
   height: 30px;
-  position: relative;
+  /* position: relative;
   display: grid;
-  text-decoration: none;
+  text-decoration: none; */
 }
 ul.popup {
   /* 제일 작성 많이 되야 될 부분 */
