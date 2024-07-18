@@ -40,7 +40,7 @@
 요때 설정할 수 있는게 */
   -webkit-line-clamp: 2;
   overflow: hidden;
-  web-kit: 브라우저를 만드는 엔진, 파이어복스 빼고 다 쓰임;
+  /* web-kit: 브라우저를 만드는 엔진, 파이어복스 빼고 다 쓰임; */
   /* display: -webkit-box; 옛날 문법임 */
 }
 .courseItem .tags {

@@ -4,7 +4,7 @@ const COLORS = {
   yellow: "#f7d16f",
 };
 
-function getCourseColor(code) {
+function getCourseColor(code = "000") {
   const firstCode = Number(code.charAt(0));
   // Number을 안 쓰면 다르게 써야됨 (숫자를 써야됨)
   switch (firstCode) {
