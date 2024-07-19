@@ -1,9 +1,13 @@
 import { initializeApp } from "firebase/app";
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
+  doc,
   getDocs,
   getFirestore,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 
@@ -83,7 +87,41 @@ async function getMember(values) {
 
   return { memberObj, message, getMember };
 }
+
+async function updateDatas(collectionName, docId, updateObj, option) {
+  // 문서의 reference 객체가 필요
+  const docRef = doc(db, collectionName, docId);
+  // 로그인한 사용자의 문서 아이디
+
+  try {
+    // 배열을 저장하는 필드
+    if (!option) {
+      await updateDoc(docRef, updateObj);
+      // 업데이트는 이게 끝임
+    } else {
+      // 옵션이 들어왔을 때
+      if (option.type == "ADD") {
+        // 파이어베이스에서 그대로 가져옴
+        await updateDoc(docRef, {
+          [option.fieldName]: arrayUnion(updateObj),
+          // option.fieldName 키값인데 객체처리가 안되서 오류난 거. 대괄호해야됨
+        });
+        // 옵션에는 필드명하고 추가를 해야 할지 삭제를 할 지 파라미터를 받은 다음 어레이유니온할 지 어레이리무브할 지 정한다.
+      } else if (option.type == "DELETE") {
+        await updateDoc(docRef, {
+          [option.fieldName]: arrayRemove(updateObj),
+        });
+        // 수정이 성공했는 지 실패했는 지 확인해야됨
+        // 이거를 트라이캐치 캐치 안에 집어넣었다.
+      }
+    }
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 // 로그인 파일에서 만들고 반환받는 방법이 있고 파이어베이스에서 하는 방법이 있다.
 // 사무 가면 var 되 있는데 let으로 바꿔주는 게 좋음
 // 구조분해하면 사무에서 물어볼거임. 똑같은 거라고 대답하면 됨
-export { getDatas, getData, getMember };
+export { getDatas, getData, getMember, updateDatas };

@@ -56,27 +56,31 @@ function UserMenu(props) {
       {isOpen && (
         <ul className={styles.popup}>
           {/* 위시리스트 회원가입 로그인 누르면  */}
-          <Link to="/wishlist">
-            <li>위시리스트</li>
-          </Link>
-          <li className={styles.disabled}>회원가입</li>
           {/* {!isLogined ? () : ()} */}
           {/* 헷갈릴 때 삼환연산자 사용한다.  */}
           {!isLogined ? (
-            <Link to="/login">
-              <li>로그인</li>
-            </Link>
+            <>
+              <li className={styles.disabled}>위시리스트</li>
+              <Link to="/login">
+                <li>로그인</li>
+              </Link>
+            </>
           ) : (
-            /**/ /* 부정연산자가 되어있으면 트루 아니면 펄스 */
-            <Link to="/logout">
-              <li>로그아웃</li>
-            </Link>
+            <>
+              <Link to="/wishlist">
+                <li>위시리스트</li>
+              </Link>
+              <Link to="/logout">
+                <li>로그아웃</li>
+              </Link>
+            </>
           )}
         </ul>
       )}
     </div>
   );
 }
+/**/ /* 부정연산자가 되어있으면 트루 아니면 펄스 */
 // 중괄호 안에서 중괄호 주석 넣으면 오류 나서 주석넣을 때 중괄호 없애야 됨
 
 export default UserMenu;

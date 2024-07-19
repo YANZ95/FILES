@@ -10,7 +10,7 @@ import {
   useParams,
 } from "react-router-dom";
 import getCourseColor from "../utils/getCourseColor";
-import { getData } from "../api/firebase";
+import { getData, updateDatas } from "../api/firebase";
 import styles from "./CoursePage.module.css";
 
 function CoursePage({}) {
@@ -34,7 +34,7 @@ function CoursePage({}) {
   // undefined 여기서 그냥 끝
   const courseColor = getCourseColor(course?.code);
 
-  //  점 쓰고 쓰면 무조건 오류가 날 거다. 근데 여기다 점을 쓴 이유가 뭘까?
+  //  getCourseColor(course.code);점 쓰고 쓰면 무조건 오류가 날 거다. 근데 여기다 점을 쓴 이유가 뭘까?
   // 코스가 들어있기 때문에 오류가 나서 이럴 땐 옵셔널체이닝이라는 방법을 쓴다.
   //   점 앞에 물음표 사용하는 걸 말함
 
@@ -47,11 +47,22 @@ function CoursePage({}) {
     setCourse(resultData);
   };
 
-  const handleAddWishlistClick = () => {
+  const handleAddWishlistClick = async () => {
     const member = JSON.parse(localStorage.getItem("member"));
     // 이런 것도 가능하면 공동함수로 만들어놓는게 편리함
     if (member) {
       // 로그인된 상태
+      const result = await updateDatas("member", member.docId, course, {
+        // result -> true or false
+        type: "ADD",
+        fieldName: "courseList",
+      });
+      if (result) {
+        navigate("/wishlist");
+      } else {
+        alert("코스 담기를 실패했습니다. \n 관리자에게 문의하세요.");
+        // \n -> 개행
+      }
     } else {
       alert("로그인을 해주세요.");
       // 안 된 상태

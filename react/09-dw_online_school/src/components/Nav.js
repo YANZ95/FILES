@@ -1,9 +1,16 @@
 import React from "react";
 import Container from "./Container";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Nav.module.css";
 import cn from "classnames";
 import UserMenu from "./UserMenu";
+
+function getLinkStyle({ isActive }) {
+  // 함수의 파라미터로 inActive, isPending, isTransitoining이 넘어온다.
+  return {
+    TextDecoration: isActive ? "underline" : undefined,
+  };
+}
 
 function Nav({ className }) {
   return (
@@ -17,11 +24,15 @@ function Nav({ className }) {
         </Link>
         <ul className={styles.menu}>
           <li>
-            <Link to="courses">카탈로그</Link>
+            <NavLink to="/courses" style={getLinkStyle}>
+              카탈로그
+            </NavLink>
             {/* 라우팅 경로에 넣어줄 엘리멘탈 ~ */}
           </li>
           <li>
-            <Link to="questions">커뮤니티</Link>
+            <NavLink to="/questions" style={getLinkStyle}>
+              커뮤니티
+            </NavLink>
           </li>
           <li>
             <UserMenu />
