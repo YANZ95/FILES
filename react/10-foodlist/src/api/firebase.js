@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   getDocs,
@@ -13,15 +13,14 @@ import {
   orderBy,
   limit,
   startAfter,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
-import QuestionItem from './../../../09-dw_online_school/src/components/QuestionItem';
   deleteObject,
   getDownloadURL,
   getStorage,
   ref,
   uploadBytes,
-} from "firebase/storage";
+} from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyC6SpkPT2nTZ5E_gAN-yWwSTO0T-2mFcKM",
@@ -80,46 +79,48 @@ async function uploadImage(path, file) {
 }
 
 async function getLastNum(collectionName, field) {
-  const collect = await collection(db, collectionName);
   const q = query(
     getCollection(collectionName), // collection
-    orderBy(field, "desc"), // 정렬할 필드로 내림차순
-    limit(1) //1개만 가져온다
+    orderBy(field, 'desc'), // 정렬할 필드로 내림차순
+    limit(1) // 1개만 가져온다
   );
   const lastDoc = await getDocs(q);
   const lastId = lastDoc.docs[0].data()[field];
-
   return lastId;
 }
 
 async function getDatasOrderByLimit(collectionName, options) {
   const { fieldName, limits } = options;
-  // 일단 두개 받아서 쓸거임
-  let QuestionItem;
-  if(!options.lq) {
-
-  }
-  q = query(
-    // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
+   // 일단 두개 받아서 쓸거임
+  let q;
+  if (!options.lq) {
+    q = query(
+       // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
     //  컬렉션 함수만 넣을거지만 다른 함수도 넣을 거라서 쿼리함수 넣어줌
-    getCollection(collectionName),
-    // 위에서 쓴 거 받아서 써줌
-    orderBy(fieldName, "desc"),
-    startAfter(options.lq),
-    limit(limits)
-    // 위에서 쓴 거 받아서 써줌
-  );
+      getCollection(collectionName),
+       // 위에서 쓴 거 받아서 써줌
+      orderBy(fieldName, 'desc'),
+      limit(limits)
+    );
+  } else {
+    q = query(
+      getCollection(collectionName),
+      orderBy(fieldName, 'desc'),
+      startAfter(options.lq),
+      limit(limits)
+    );
+  }
+
 
   const snapshot = await getDocs(q);
-  const odcs = snapshot.docs;
+  const docs = snapshot.docs;
   const lastQuery = docs[docs.length - 1];
-
-  const resultData = snapshot.docs.map((doc) => ({
-    ...doc.data(),
-    docId: doc.id,
-  }));
-  // 일반함수로 쓰면 (function(doc){return {...doc.data(), docId: doc.id}});
-  return {resultData, lastQuery};
+  console.log(lastQuery);
+  const resultData = docs.map(function (doc) {
+    return { ...doc.data(), docId: doc.id };
+  });
+    // 일반함수로 쓰면 (function(doc){return {...doc.data(), docId: doc.id}});
+  return { resultData, lastQuery };
 }
 
 export { addDatas, getDatasOrderByLimit };
