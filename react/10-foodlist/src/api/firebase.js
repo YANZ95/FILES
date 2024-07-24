@@ -15,6 +15,7 @@ import {
   startAfter,
 } from "firebase/firestore";
 import {
+import QuestionItem from './../../../09-dw_online_school/src/components/QuestionItem';
   deleteObject,
   getDownloadURL,
   getStorage,
@@ -79,6 +80,7 @@ async function uploadImage(path, file) {
 }
 
 async function getLastNum(collectionName, field) {
+  const collect = await collection(db, collectionName);
   const q = query(
     getCollection(collectionName), // collection
     orderBy(field, "desc"), // 정렬할 필드로 내림차순
@@ -90,7 +92,37 @@ async function getLastNum(collectionName, field) {
   return lastId;
 }
 
-export { addDatas };
+async function getDatasOrderByLimit(collectionName, options) {
+  const { fieldName, limits } = options;
+  // 일단 두개 받아서 쓸거임
+  let QuestionItem;
+  if(!options.lq) {
+
+  }
+  q = query(
+    // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
+    //  컬렉션 함수만 넣을거지만 다른 함수도 넣을 거라서 쿼리함수 넣어줌
+    getCollection(collectionName),
+    // 위에서 쓴 거 받아서 써줌
+    orderBy(fieldName, "desc"),
+    startAfter(options.lq),
+    limit(limits)
+    // 위에서 쓴 거 받아서 써줌
+  );
+
+  const snapshot = await getDocs(q);
+  const odcs = snapshot.docs;
+  const lastQuery = docs[docs.length - 1];
+
+  const resultData = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    docId: doc.id,
+  }));
+  // 일반함수로 쓰면 (function(doc){return {...doc.data(), docId: doc.id}});
+  return {resultData, lastQuery};
+}
+
+export { addDatas, getDatasOrderByLimit };
 
 // async function getDatas(collectionName) {
 //   const collect = await collection(db, collectionName);
