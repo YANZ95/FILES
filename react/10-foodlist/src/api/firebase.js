@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   getDocs,
@@ -13,14 +13,14 @@ import {
   orderBy,
   limit,
   startAfter,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 import {
   deleteObject,
   getDownloadURL,
   getStorage,
   ref,
   uploadBytes,
-} from 'firebase/storage';
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC6SpkPT2nTZ5E_gAN-yWwSTO0T-2mFcKM",
@@ -62,6 +62,11 @@ async function addDatas(collectionName, addObj) {
   // 저장할 수 있는 객체가 만들어짐
 
   // 컬렉션에 저장
+  const result = await addDoc(getCollection(collectionName), addObj);
+  const docSnap = await getDoc(result);
+  const resultData = { ...docSnap.data(), docId: docSnap.id };
+  return resultData;
+
   await addDoc(getCollection(collectionName), addObj);
   // 컬렉션하고 저장할 객체
 }
@@ -81,7 +86,7 @@ async function uploadImage(path, file) {
 async function getLastNum(collectionName, field) {
   const q = query(
     getCollection(collectionName), // collection
-    orderBy(field, 'desc'), // 정렬할 필드로 내림차순
+    orderBy(field, "desc"), // 정렬할 필드로 내림차순
     limit(1) // 1개만 가져온다
   );
   const lastDoc = await getDocs(q);
@@ -91,26 +96,29 @@ async function getLastNum(collectionName, field) {
 
 async function getDatasOrderByLimit(collectionName, options) {
   const { fieldName, limits } = options;
-   // 일단 두개 받아서 쓸거임
+  // 일단 두개 받아서 쓸거임
   let q;
   if (!options.lq) {
     q = query(
-       // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
-    //  컬렉션 함수만 넣을거지만 다른 함수도 넣을 거라서 쿼리함수 넣어줌
+      // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
+      //  컬렉션 함수만 넣을거지만 다른 함수도 넣을 거라서 쿼리함수 넣어줌
       getCollection(collectionName),
-       // 위에서 쓴 거 받아서 써줌
-      orderBy(fieldName, 'desc'),
+      // 위에서 쓴 거 받아서 써줌
+      orderBy(fieldName, "desc"),
       limit(limits)
     );
   } else {
     q = query(
       getCollection(collectionName),
-      orderBy(fieldName, 'desc'),
+      orderBy(fieldName, "desc"),
       startAfter(options.lq),
       limit(limits)
     );
   }
 
+  async function updateDatas() {
+    console.log("updatas 함수 실행!!");
+  }
 
   const snapshot = await getDocs(q);
   const docs = snapshot.docs;
@@ -119,11 +127,36 @@ async function getDatasOrderByLimit(collectionName, options) {
   const resultData = docs.map(function (doc) {
     return { ...doc.data(), docId: doc.id };
   });
-    // 일반함수로 쓰면 (function(doc){return {...doc.data(), docId: doc.id}});
+  // 일반함수로 쓰면 (function(doc){return {...doc.data(), docId: doc.id}});
   return { resultData, lastQuery };
 }
 
-export { addDatas, getDatasOrderByLimit };
+async function deleteDatas(collectionName, docId, imgUrl) {
+  // 스토리지에 있는 이미지를 삭제할 때 필요한 것 ==> 파일명(경로포함) or 파일 url
+  // 스토리지 객체 생성
+  const storage = getStorage();
+
+  let message;
+  try {
+    // 삭제할 파일의 참조객체 생성(ref 함수 사용)
+    message = "이미지 삭제에 실패했습니다. 관리자에게 문의하세요.";
+    const deleteRef = ref(storage, imgUrl);
+    // 파일삭제, 참조할 참조객체 만들고 삭제하는 함수에 넣는다.
+    await deleteObject(deleteRef);
+
+    // 삭제할 문서의 참조객체 생성(doc 함수 사용)
+    message = "문서 삭제에 실패했습니다. 관리자에게 문의하세요.";
+    const deleteDocRef = doc(db, collectionName, docId);
+    // 문서 삭제
+    await deleteDoc(deleteDocRef);
+
+    return { result: true, message: message };
+  } catch (error) {
+    return { result: false, message: message };
+  }
+}
+
+export { addDatas, getDatasOrderByLimit, deleteDatas };
 
 // async function getDatas(collectionName) {
 //   const collect = await collection(db, collectionName);

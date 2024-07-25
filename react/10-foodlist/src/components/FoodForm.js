@@ -21,8 +21,18 @@ function sanitize(type, value) {
   }
 }
 
-function FoodForm(props) {
+function FoodForm({
+  onSubmit,
+  onSubmitSuccess,
+  onCancel,
+  initialValues = INITIAL_VALUES,
+}) {
   const [values, setValues] = useState(INITIAL_VALUES);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    setValues(initialValues);
+  }, [initialValues]);
 
   const handleChange = (name, value) => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -31,10 +41,24 @@ function FoodForm(props) {
     const { name, value, type } = e.target;
     handleChange(name, sanitize(type, value));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const resultData = await addDatas("food", values);
+
+
+
+
+
+    
+    let result;
+    try {
+      setIsSubmitting(true);
+      result = await onSubmit("food", values);
+    } catch (error) {
+    } finally {
+      setIsSubmitting(false);
+    }
+    setValues(INITIAL_VALUES);
+    onSubmitSuccess(result);
   };
 
   return (
@@ -44,6 +68,7 @@ function FoodForm(props) {
         onChange={handleChange}
         name="imgUrl"
         value={values.imgUrl}
+        initialPreview={initialPreview}
       />
       <div className="FoodForm-rows">
         <div className="FoodForm-title-calorie">
@@ -62,7 +87,20 @@ function FoodForm(props) {
             name="calorie"
             value={values.calorie}
           />
-          <button className="FoodForm-submit-button" type="submit">
+          {onCancel && (
+            <button
+              className="FoodForm-cancel-button"
+              type="button"
+              onClick={() => onCancel(null)}
+            >
+              취소
+            </button>
+          )}
+          <button
+            className="FoodForm-submit-button"
+            type="submit"
+            disabled={isSubmitting}
+          >
             확인
           </button>
         </div>
