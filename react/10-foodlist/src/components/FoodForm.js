@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import FileInput from "./FileInput";
 import "./FoodForm.css";
 import { addDatas } from "../api/firebase";
+import { useLocale } from "../contexts/LocaleContext";
+import useTranslate from "../hooks/useTranslate";
+import useAsync from "../hooks/useAsync";
 
 const INITIAL_VALUES = {
   title: "",
@@ -26,13 +29,13 @@ function FoodForm({
   onSubmitSuccess,
   onCancel,
   initialValues = INITIAL_VALUES,
+  initialPreview,
 }) {
-  const [values, setValues] = useState(INITIAL_VALUES);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    setValues(initialValues);
-  }, [initialValues]);
+  const [values, setValues] = useState(initialValues);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, submittingError, onSubmitAsync] = useAsync(onSubmit);
+  // const locale = useContext(LocaleContext);
+  const t = useTranslate();
 
   const handleChange = (name, value) => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -43,24 +46,10 @@ function FoodForm({
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-
-
-
-    
-    let result;
-    try {
-      setIsSubmitting(true);
-      result = await onSubmit("food", values);
-    } catch (error) {
-    } finally {
-      setIsSubmitting(false);
-    }
+    const resultData = await onSubmitAsync("food", values);
+    onSubmitSuccess(resultData);
     setValues(INITIAL_VALUES);
-    onSubmitSuccess(result);
   };
-
   return (
     <form className="FoodForm" onSubmit={handleSubmit}>
       <FileInput
@@ -76,7 +65,7 @@ function FoodForm({
             className="FoodForm-title"
             type="text"
             onChange={handleInputChange}
-            placeholder="이름을 입력해주세요."
+            placeholder={t("title placeholder")}
             name="title"
             value={values.title}
           />

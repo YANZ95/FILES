@@ -81,11 +81,25 @@ function App() {
   };
 
   const handleAddSuccess = (resultData) => {
-    setItems((prevItems) => [prevItems, ...resultData]);
-    // prevItems 맨 앞부터 들어가야 첫번째 원소로 들어갈 수 있음
+    setItems((prevItems) => [resultData, ...prevItems]);
   };
 
-  const handleUpdateSuccess = () => {};
+  const handleUpdateSuccess = (result) => {
+    setItems((prevItems) => {
+      // 수정된 item의 index 찾기
+      const splitIdx = prevItems.findIndex(function (item) {
+        return item.id === result.id;
+      });
+      const beforeArr = prevItems.slice(0, splitIdx);
+      const afterArr = prevItems.slice(splitIdx + 1);
+      return [...beforeArr, result, ...afterArr];
+      // return [
+      //   ...prevItems.slice(0, splitIdx),
+      //   result,
+      //   ...prevItems.slice(splitIdx + 1)
+      // ]
+    });
+  };
 
   useEffect(() => {
     handleLoad({ fieldName: order, limits: LIMITS, lq: undefined });
