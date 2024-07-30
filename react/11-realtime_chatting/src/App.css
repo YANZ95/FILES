@@ -11,7 +11,10 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow-y: scroll;
+  /* overflow-y: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0; */
 }
 .App header {
   background-color: #a9bdce;
@@ -27,27 +30,75 @@ body {
 }
 .App section {
   background-color: #b2c7d9;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
 }
 main {
   padding: 10px;
+  flex: 1 1;
+  overflow-y: auto;
+  /* 처음엔 채팅 없을 때는 스크롤 안 생기다가 
+  많아졌을 때 생기도록 자동설정 */
+}
+main::-webkit-scrollbar {
+  width: 0.6rem;
+}
+main::-webkit-scrollbar-track {
+  /* 스크롤바가 가리지 않는 영역을 트랙이라고 함 */
+  /* background-color: #fff; */
+}
+main::-webkit-scrollbar-thumb {
+  background-color: #8b9aab;
 }
 form {
   background-color: #ffec42;
   width: 100%;
   max-width: 450px;
   font-size: 1.5rem;
+  height: 8vh;
+  flex: none;
   display: flex;
-  height: 100px;
 }
 form button {
   background-color: #ffec42;
-  width: 110px;
+  width: 20%;
 }
 button {
-  background-color: #fff;
-  border-radius: 30px;
-  padding: 8px;
   border: none;
+  color: gray;
+  padding: 5px 5px;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  /* background-color: #fff;
+  border-radius: 30px; */
+}
+.sign-in {
+  color: gray;
+  background-color: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 25px;
+}
+.notice {
+  margin-top: 20px;
+  color: #72808b;
+}
+.sign-out {
+  border: none;
+  color: gray;
+  padding: 8px 15px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  border-radius: 25px;
+}
+.sign-out:hover {
+  color: #fff;
+  background-color: rgb(255, 85, 43);
 }
 form input {
   width: 100%;
@@ -57,4 +108,29 @@ form input {
   outline: none;
   border: none;
   padding: 0 15px;
+}
+.message {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.message img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.message p {
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-align: center;
+  color: #262626;
+}
+.message.sent {
+  flex-direction: row-reverse;
+}
+.message.sent p {
+  background-color: #ffec42;
+}
+.message.received p {
+  background-color: #fff;
 }
