@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import "./DiaryList.css";
 import DiaryItem from "./DiaryItem";
@@ -15,9 +15,13 @@ const filterOptionList = [
   { name: "안좋은 감정만", value: "bad" },
 ];
 
-function ControlMenu({ optionList }) {
+function ControlMenu({ optionList, value, onChange }) {
   return (
-    <select className="ControlMenu">
+    <select
+      className="ControlMenu"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
       {optionList.map((option, idx) => {
         return (
           <option key={idx} value={option.value}>
@@ -29,8 +33,29 @@ function ControlMenu({ optionList }) {
   );
 }
 
-function DiaryList(props) {
+function DiaryList({ diaryList }) {
+  // diaryList 을 넣으면 필터링을 넣을 수 있다.
+  const [order, setOrder] = useState("latest");
+  const [filter, setFilter] = useState();
   const Navigate = useNavigate();
+
+  const getSortedDiaryList = () => {
+    // 필터링 함수
+    const getFilteredList = () => {
+      // filter state가 good 이면(emotion의 값이 3보다 작거나 같을 때)
+      // filter state가 good 이 아니면(emotion의 값이 3보다 클 때)
+    };
+    // [1, 11, 21].sort((a,b) => b - a);
+    // 정렬 함수
+    const getOrderedList = () => {
+      // order state가 latest 이면 b - a
+      // order state가 latest 가 아니면 a - b
+    };
+    const filteredList = diaryList.filter((diary) => getFilteredList(diary));
+    const sortedList = filteredList.sort(getOrderedList);
+    return sortedList;
+  };
+
   return (
     <div className="diaryList">
       <div className="menu_wrapper">
@@ -46,7 +71,12 @@ function DiaryList(props) {
           />
         </div>
       </div>
-      <DiaryItem />
+      {diaryList.map((diary) => {
+        return <DiaryItem key={diary.id} {...diary} />;
+        {
+          /* 원래 같았으면 홈페이지에서 렌더링을 하는데 다이어리에서 컴포넌트를 만들어서 할 수도 있다. */
+        }
+      })}
     </div>
   );
 }
