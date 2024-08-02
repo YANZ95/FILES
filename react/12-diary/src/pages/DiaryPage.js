@@ -4,10 +4,10 @@ import Button from "../components/Button";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import DiaryList from "./../components/DiaryList";
 import { DiaryStateContext } from "../App";
-import { emotionList } from "../uitll/emotion";
+import { emotionList } from "../utill/emotion";
 import EmotionItem from "../components/EmotionItem";
 import "./DiaryPage.css";
-import { changeTitle } from "../uitll/changeTitle";
+import { changeTitle } from "../utill/changeTitle";
 
 function DiaryPage() {
   const { id } = useParams();

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import DiaryEditor from "../components/DiaryEditor";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { DiaryStateContext } from "../App";
-import { changeTitle } from "../uitll/changeTitle";
+import { changeTitle } from "../utill/changeTitle";
 
 function EditPage(props) {
   // EditPage에서 DiaryEditor에 데이터를 넘기도록 만들기

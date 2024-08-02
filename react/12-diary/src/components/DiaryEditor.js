@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import Button from "./Button";
-import { emotionList } from "../uitll/emotion";
+import { emotionList } from "../utill/emotion";
 import EmotionItem from "./EmotionItem";
 import "./DiaryEditor.css";
 import { DiaryDisatchContext } from "../App";
