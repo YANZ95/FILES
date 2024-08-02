@@ -12,6 +12,8 @@ import {
   runTransaction,
   getDocs,
   getDoc,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -105,4 +107,17 @@ export async function getDatas(collectionName, queryOptions) {
   const docs = snapshot.docs;
   const resultData = docs.map((doc) => ({ ...doc.data(), docId: doc.id }));
   return resultData;
+}
+
+export async function updateDatas(collectionName, docId, updateObj) {
+  try {
+    const docRef = doc(db, collectionName, docId);
+    await updateDoc(docRef, updateObj);
+    const snapshot = await getDoc(docRef);
+    const resultData = { ...snapshot.data(), docId: snapshot.id };
+    return resultData;
+  } catch (error) {
+    // 여기서는 콘솔만 찍었음
+    console.log("Error Update:", error);
+  }
 }

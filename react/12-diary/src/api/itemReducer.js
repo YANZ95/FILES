@@ -1,4 +1,4 @@
-import { addDatas, getDatas } from "./firebase";
+import { addDatas, getDatas, updateDatas } from "./firebase";
 import { collection } from "firebase/firestore";
 
 // action types
@@ -24,8 +24,18 @@ export function reducer(state, action) {
       return { ...state, items: action.payload, error: null };
     case ADD_ITEM:
       return { ...state, items: [...state.items, action.payload], error: null };
+    // 교체되는 게 아니라 아예 새로운 걸로 바뀜. 리듀서는 순수함수임
+    // 기존에 있던 state가 아니라 새로운 state로 바꿔주는 거임.
+    // 리듀서는 새로운 거지만 그 안에 있는 함수는 바뀌면 안 됨
     case UPDATE_ITEM:
-      return;
+      return {
+        ...state,
+        items: state.items.map(
+          (item) => (item.id === action.payload.id ? action.payload : item)
+          // payload가 수정된 거
+        ),
+        error: null,
+      };
     case DELETE_ITEM:
     case SET_ERROR:
       return { ...state, error: action.payload };
@@ -57,5 +67,18 @@ export const additem = async (collectionName, addObj, dispatch) => {
   //   dispatch 실행 시 reducer 함수로 간다.
   dispatch({ type: ADD_ITEM, payload: resultData });
 };
-export const updateItem = async () => {};
+export const updateItem = async (
+  collectionName,
+  docId,
+  updateObj,
+  dispatch
+) => {
+  const resultData = await updateDatas(collectionName, docId, updateObj);
+  if (!resultData) {
+    dispatch({ type: SET_ERROR, payload: "ADD Datas 에러!!!" });
+  }
+
+  //   dispatch 실행 시 reducer 함수로 간다.
+  dispatch({ type: UPDATE_ITEM, payload: resultData });
+};
 export const deleteItem = async () => {};

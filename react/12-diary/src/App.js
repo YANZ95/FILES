@@ -3,7 +3,15 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NewPage from "./pages/NewPage";
-import { additem, fetchItems, initialState, reducer } from "./api/itemReducer";
+import {
+  additem,
+  fetchItems,
+  initialState,
+  reducer,
+  updateItem,
+} from "./api/itemReducer";
+import DiaryPage from "./pages/DiaryPage";
+import EditPage from "./pages/EditPage";
 
 // 2개 컨텍스트 설정
 export const DiaryStateContext = createContext();
@@ -29,6 +37,15 @@ function App() {
 
   // READ
   // UPDATE
+  const onUpdate = async (values, docId) => {
+    const updateObj = {
+      updatedAt: new Date().getTime(),
+      date: new Date(values.date).getTime(),
+      content: values.content,
+      emotion: values.emotion,
+    };
+    await updateItem("diary", values.docId, updateObj, dispatch);
+  };
   // DELETE
 
   useEffect(() => {
@@ -47,7 +64,7 @@ function App() {
   return (
     // 아래 2개 컨텍스트 범위 설정  DiaryStateContext, DiaryDisatchContext
     <DiaryStateContext.Provider value={state.items}>
-      <DiaryDisatchContext.Provider value={{ onCreate }}>
+      <DiaryDisatchContext.Provider value={{ onCreate, onUpdate }}>
         <BrowserRouter>
           {/* 여기서 위 2개의 벨류 안의 내용물을 사용함  */}
           <div className="App">
@@ -55,8 +72,8 @@ function App() {
               <Route path="/">
                 <Route index element={<HomePage />} />
                 <Route path="new" element={<NewPage />} />
-                {/* <Route path='edit' element={} />
-<Route path='diary' element={} /> */}
+                <Route path="edit/:id" element={<EditPage />} />
+                <Route path="diary/:id" element={<DiaryPage />} />
               </Route>
             </Routes>
           </div>

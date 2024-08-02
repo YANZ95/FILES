@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import Button from "./Button";
 import { emotionList } from "../uitll/emotion";
@@ -13,18 +13,18 @@ const INITIAL_VALUES = {
   emotion: 3,
 };
 
-function DiaryEditor(props) {
+function DiaryEditor({ originData = INITIAL_VALUES, isEdit }) {
   // 앱 파일의 컨텍스트를 써줌 , function DiaryEditor,  useContext(DiaryDisatchContext)
   // 데이터를 추가하는 함수 - onCreate 함수, 이거를
   // 뭘로 넘겨주냐면 context로 넘긴다고 했음
-  const { onCreate } = useContext(DiaryDisatchContext);
+  const { onCreate, onUpdate } = useContext(DiaryDisatchContext);
   // 1.날짜, 감정, 텍스트 관리할 상태를 만들어야한다.
   //   const [selectedEmotion, setSelectedEmotion] = useState(null);
   // 편하게 쓰려고 구조분해를 써주는 거
   //   const [date, setDate] = useState("");
   //   const [text, setText] = useState("");
   //   이렇게 따로 따로 만들면 너무 비효율적이다!!!!
-  const [values, setValues] = useState(INITIAL_VALUES);
+  const [values, setValues] = useState(originData);
 
   //   2. 각각의 EmotionItem을 클릭했을 때 콘솔창에 emotion_id 를 출력해본다.
   //   const handleClick = (emotion_id) => {
@@ -49,11 +49,18 @@ function DiaryEditor(props) {
       contentRef.current.focus();
       return;
     }
-    if (window.confirm("새로운 일기를 저장하시겠습니까?")) {
-      onCreate(values);
+    if (
+      window.confirm(
+        isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 저장하시겠습니까?"
+      )
+    ) {
+      if (!isEdit) {
+        onCreate(values);
+      } else {
+        onUpdate(values);
+      }
+      navigate("/", { replace: true });
     }
-    // 리액트는 버츄어돔만 써서 window를 붙여줘야 리액트가 인식함
-    navigate("/", { replace: true });
   };
 
   // 4. 상태 변경 함수를 emotionItem의 onClick에 전달
@@ -62,11 +69,23 @@ function DiaryEditor(props) {
   // emotion 을 클릭했을 때 감정을 관리하는 상태의 값을 변경
   // 변경된 상태의 값과 emotion의 id가 같으면 isSelected 라는 props 을 전달해서
   // emotionItem_on_${id} 클래스가 적용될 수 있도록 만든다.
+
+  useEffect(() => {
+    if (isEdit) {
+      // 받아온 날짜 데이터(밀리세컨즈 단위)를 formatting(yyyy-mm-dd) 해주자.
+      handleChange(
+        "date",
+        new Date(originData.date).toISOString().split("T")[0]
+      );
+    }
+  }, []);
+
   return (
     <div className="diaryEditor">
       <Header
-        headText={"새 일기 작성하기"}
+        headText={isEdit ? "일기 수정하기" : "새 일기 작성하기"}
         leftChild={<Button text={"<뒤로 가기"} />}
+        rightChild={isEdit && <Button text={"삭제하기"} type={"negative"} />}
       />
       <div>
         <section>
@@ -85,7 +104,15 @@ function DiaryEditor(props) {
           <h4>오늘의 감정</h4>
           <div className="input-box emotion_list_wrapper">
             {emotionList.map((emotion) => {
-              return <EmotionItem key={emotion.id} {...emotion} />;
+              return (
+                <EmotionItem
+                  key={emotion.id}
+                  {...emotion}
+                  onClick={handleChange}
+                  name="emotion"
+                  isSelected={emotion.emotion_id === values.emotion}
+                />
+              );
               // {...emotion} 이렇게 쓰면 한꺼번에 보낼 수 있다.
             })}
           </div>

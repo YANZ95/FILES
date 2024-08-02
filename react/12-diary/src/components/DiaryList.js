@@ -36,22 +36,36 @@ function ControlMenu({ optionList, value, onChange }) {
 function DiaryList({ diaryList }) {
   // diaryList 을 넣으면 필터링을 넣을 수 있다.
   const [order, setOrder] = useState("latest");
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState("all");
   const Navigate = useNavigate();
 
   const getSortedDiaryList = () => {
     // 필터링 함수
-    const getFilteredList = () => {
-      // filter state가 good 이면(emotion의 값이 3보다 작거나 같을 때)
-      // filter state가 good 이 아니면(emotion의 값이 3보다 클 때)
+    const getFilteredList = (diary) => {
+      if (filter === "good") {
+        // filter state가 good 이면(emotion의 값이 3보다 작거나 같을 때)
+        return diary.emotion <= 3;
+      } else {
+        // filter state가 good 이 아니면(emotion의 값이 3보다 클 때)
+        return diary.emotion > 3;
+      }
     };
+
     // [1, 11, 21].sort((a,b) => b - a);
     // 정렬 함수
-    const getOrderedList = () => {
-      // order state가 latest 이면 b - a
-      // order state가 latest 가 아니면 a - b
+    const getOrderedList = (a, b) => {
+      if (order === "latest") {
+        // order state가 latest 가 아니면 a - b
+        return b.date - a.date;
+      } else {
+        // const filteredList = diaryList.filter((diary) => getFilteredList(diary));
+        return a.date - b.date;
+      }
     };
-    const filteredList = diaryList.filter((diary) => getFilteredList(diary));
+    const filteredList =
+      filter === "all"
+        ? diaryList
+        : diaryList.filter((diary) => getFilteredList(diary));
     const sortedList = filteredList.sort(getOrderedList);
     return sortedList;
   };
@@ -60,8 +74,8 @@ function DiaryList({ diaryList }) {
     <div className="diaryList">
       <div className="menu_wrapper">
         <div className="control_menus">
-          <ControlMenu optionList={sortOptionList} />
-          <ControlMenu optionList={filterOptionList} />
+          <ControlMenu optionList={sortOptionList} onChange={setOrder} />
+          <ControlMenu optionList={filterOptionList} onChange={setFilter} />
         </div>
         <div className="new_btn">
           <Button
@@ -71,7 +85,7 @@ function DiaryList({ diaryList }) {
           />
         </div>
       </div>
-      {diaryList.map((diary) => {
+      {getSortedDiaryList().map((diary) => {
         return <DiaryItem key={diary.id} {...diary} />;
         {
           /* 원래 같았으면 홈페이지에서 렌더링을 하는데 다이어리에서 컴포넌트를 만들어서 할 수도 있다. */
