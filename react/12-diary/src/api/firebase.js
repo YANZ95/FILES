@@ -14,6 +14,7 @@ import {
   getDoc,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -34,7 +35,7 @@ function getCollection(collectionName) {
   return collection(db, collectionName);
 }
 
-function getUserAuth() {
+export function getUserAuth() {
   //  async 필요 없음. const auth = getAuth(app);에서 그대로 가져옴
   return auth;
 }
@@ -119,5 +120,15 @@ export async function updateDatas(collectionName, docId, updateObj) {
   } catch (error) {
     // 여기서는 콘솔만 찍었음
     console.log("Error Update:", error);
+  }
+}
+
+export async function deleteDatas(collectionName, docId) {
+  try {
+    const docRef = doc(db, collectionName, docId);
+    await deleteDoc(docRef);
+    return true;
+  } catch (error) {
+    console.log("Error Delete:", error);
   }
 }

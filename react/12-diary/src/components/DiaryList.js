@@ -33,11 +33,20 @@ function ControlMenu({ optionList, value, onChange }) {
   );
 }
 
-function DiaryList({ diaryList }) {
+function DiaryList({ diaryList, auth }) {
   // diaryList 을 넣으면 필터링을 넣을 수 있다.
   const [order, setOrder] = useState("latest");
   const [filter, setFilter] = useState("all");
   const Navigate = useNavigate();
+
+  const checkLogin = () => {
+    if (!auth.currentUser) {
+      alert("로그인을 해주세요.");
+      Navigate("/login");
+    } else {
+      Navigate("/new");
+    }
+  };
 
   const getSortedDiaryList = () => {
     // 필터링 함수
@@ -81,9 +90,19 @@ function DiaryList({ diaryList }) {
           <Button
             text={"새 일기쓰기"}
             type="positive"
-            onClick={() => Navigate("/new")}
+            onClick={checkLogin}
+            // onClick={() => Navigate("/new")}
           />
         </div>
+        {auth.currentUSer && (
+          <div>
+            <Button
+              text={"로그아웃"}
+              type={"negative"}
+              onClick={() => auth.signOut()}
+            />
+          </div>
+        )}
       </div>
       {getSortedDiaryList().map((diary) => {
         return <DiaryItem key={diary.id} {...diary} />;

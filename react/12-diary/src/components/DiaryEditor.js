@@ -17,7 +17,7 @@ function DiaryEditor({ originData = INITIAL_VALUES, isEdit }) {
   // 앱 파일의 컨텍스트를 써줌 , function DiaryEditor,  useContext(DiaryDisatchContext)
   // 데이터를 추가하는 함수 - onCreate 함수, 이거를
   // 뭘로 넘겨주냐면 context로 넘긴다고 했음
-  const { onCreate, onUpdate } = useContext(DiaryDisatchContext);
+  const { onCreate, onUpdate, onDelete } = useContext(DiaryDisatchContext);
   // 1.날짜, 감정, 텍스트 관리할 상태를 만들어야한다.
   //   const [selectedEmotion, setSelectedEmotion] = useState(null);
   // 편하게 쓰려고 구조분해를 써주는 거
@@ -62,6 +62,13 @@ function DiaryEditor({ originData = INITIAL_VALUES, isEdit }) {
       navigate("/", { replace: true });
     }
   };
+  const handleDelete = () => {
+    if (window.confirm("정말 삭제하시겠습니까")) {
+      onDelete(originData.docId);
+      navigate("/", { replace: true });
+      // 콜론:
+    }
+  };
 
   // 4. 상태 변경 함수를 emotionItem의 onClick에 전달
   // 5.emotionItem_on_${id} 클래스가 적용될 수 있도록 만든다.
@@ -85,7 +92,15 @@ function DiaryEditor({ originData = INITIAL_VALUES, isEdit }) {
       <Header
         headText={isEdit ? "일기 수정하기" : "새 일기 작성하기"}
         leftChild={<Button text={"<뒤로 가기"} />}
-        rightChild={isEdit && <Button text={"삭제하기"} type={"negative"} />}
+        rightChild={
+          isEdit && (
+            <Button
+              text={"삭제하기"}
+              type={"negative"}
+              onClick={handleDelete}
+            />
+          )
+        }
       />
       <div>
         <section>
