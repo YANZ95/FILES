@@ -37,6 +37,8 @@ export function reducer(state, action) {
   switch (action.type) {
     case FETCH_ITEMS:
       return { ...state, items: action.payload, error: null };
+    // 액션을 만들어주는 대가로 페이로드를 씀. <액션 크리에이터>
+    //
     case ADD_ITEM:
       return { ...state, items: [...state.items, action.payload], error: null };
     // 교체되는 게 아니라 아예 새로운 걸로 바뀜. 리듀서는 순수함수임
@@ -72,6 +74,9 @@ export const fetchItems = async (collectionName, queryOptions, dispatch) => {
   const resultData = await getDatas(collectionName, queryOptions);
   if (!resultData) {
     dispatch({ type: SET_ERROR, payload: "FETCH DATAS 에러!!!" });
+    // { type: SET_ERROR, payload: "FETCH DATAS 에러!!!" } => 액션
+    // 페이로드를 만들어주는 거는 페이로드 크레이터 =>   const resultData = await getDatas(collectionName, queryOptions);
+    // 여기선 얘가 그 역할을 함
   } else {
     dispatch({ type: FETCH_ITEMS, payload: resultData });
   }

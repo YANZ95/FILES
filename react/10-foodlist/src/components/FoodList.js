@@ -47,58 +47,47 @@ function FoodListItem({ item, onDelete, onEdit }) {
   );
 }
 
-function FoodList({ items, onDelete, onUpdatas }) {
+function FoodList({ items, onDelete, onUpdate, onUpdateSuccess }) {
   // onUpdatas 바로 안 넘기고 아래에서 처리해준다.
   const [editingId, setEditingId] = useState(null);
-  // 수정할 때 입력  
-
+  // 수정할 때 입력
   return (
     <ul className="FoodList">
       {items.map((item) => {
         if (item.id === editingId) {
-          const { id, title, imgUrl, calorie, content } = item;
+          const { id, title, imgUrl, calorie, content, docId } = item;
           // 추출
-          const initialValues = (title, calorie, content, imgUrl: null);
+          const initialValues = { title, calorie, content, imgUrl: null };
 
+          const handleSubmit = (collectionName, updateObj) => {
+            const result = onUpdate(collectionName, docId, updateObj, imgUrl);
+            return result;
+          };
+
+          const handleSubmitSuccess = (result) => {
+            onUpdateSuccess(result);
+            // 수정 폼을 리스트로 변경
+            setEditingId(null);
+          };
           return (
             <li key={item.docId}>
-              <FoodForm initialValues={initialValues} onCancel={setEditingId} />
-          {/* initialValues */}
+              <FoodForm
+                onCancel={setEditingId}
+                initialValues={initialValues}
+                initialPreview={imgUrl}
+                onSubmit={handleSubmit}
+                onSubmitSuccess={handleSubmitSuccess}
+              />
+              {/* initialValues */}
             </li>
           );
         }
-        const handleSubmit = (collectionName, updateObj) => {
-          onUpdatas("food", docId, updateObj );
-        }
-        const handleAddSuccess = () =>  {
-
-        }
-
-        const handleUpdateSuccess = (result) => {
-setItems(prevItems => {
-  // 수정된 item의 index 찾기
- const splitIdx = prevItems.findIndex(function(item) {
-  return item.id === XPathResult.id;
- });
- const beforeArr = prevItems.slice(0,  splitIdx);
- const AfterArr = prevItems.slice(splitIdx + 1);
-return [...beforeArr, result, ...AfterArr];
-// 여기 복붙할 거 있음...
-
-})
-        }
-
-
         return (
           <li key={item.docId}>
-            <FoodListItem    
+            <FoodListItem
               item={item}
               onDelete={onDelete}
               onEdit={setEditingId}
-              initialValues={initialValues}
-              iniitialPreview={imgUrl}
-       onSubmit={handleSubmit}
-      onSubmitSuccess={handleSubmitSuccess}
             />
           </li>
         );
@@ -107,13 +96,11 @@ return [...beforeArr, result, ...AfterArr];
   );
 }
 
-export default FoodList;
-
 // import React, { useState } from "react";
 // import "./FoodList.css";
 // import FoodForm from "./FoodForm";
-import HandButton from './../../../02-rsp_game/src/HandButton';
-import { collection } from "firebase/firestore";
+// import HandButton from "./../../../02-rsp_game/src/HandButton";
+// import { collection } from "firebase/firestore";
 
 // function formatDate(value) {
 //   const date = new Date(value);
@@ -198,4 +185,4 @@ import { collection } from "firebase/firestore";
 //   );
 // }
 
-// export default FoodList;
+export default FoodList;

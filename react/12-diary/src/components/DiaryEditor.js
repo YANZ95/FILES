@@ -91,7 +91,7 @@ function DiaryEditor({ originData = INITIAL_VALUES, isEdit }) {
     <div className="diaryEditor">
       <Header
         headText={isEdit ? "일기 수정하기" : "새 일기 작성하기"}
-        leftChild={<Button text={"<뒤로 가기"} />}
+        leftChild={<Button text={"<뒤로 가기"} onClick={() => navigate(-1)} />}
         rightChild={
           isEdit && (
             <Button

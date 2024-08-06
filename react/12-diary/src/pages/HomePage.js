@@ -4,12 +4,14 @@ import Button from "../components/Button";
 import DiaryList from "../components/DiaryList";
 import { DiaryStateContext } from "../App";
 import { fetchItems } from "./../api/itemReducer";
-import DiaryList from "./../components/DiaryList";
+import { useSelector } from "react-redux";
+import { getUserAuth } from "../api/firebase";
 
 function HomePage(props) {
-  const { auth } = useContext(DiaryStateContext);
+  // const { auth } = useContext(DiaryStateContext);
+  const auth = getUserAuth();
   // diaryList, userState
-  const diaryList = useSeletctor((state) => state.diary.items);
+  const diaryList = useSelector((state) => state.diary.items);
   const [curDate, setCurDate] = useState(new Date());
   const [sortedItem, setSortedItem] = useState([]);
   const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`;

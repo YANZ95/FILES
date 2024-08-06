@@ -7,6 +7,8 @@ import searchImg from "../assets/ic-search.png";
 import FoodList from "./FoodList";
 import { useEffect, useState } from "react";
 import { addDatas, deleteDatas, getDatasOrderByLimit } from "../api/firebase";
+import { updateMetadata } from "firebase/storage";
+import LocaleSelect from "./LocaleSelect";
 
 function AppSortButton({ children, selected, onClick }) {
   return (
@@ -141,7 +143,7 @@ function App() {
         <FoodList
           items={items}
           onDelete={handleDelete}
-          onUpdate={updateDatas}
+          onUpdate={updateMetadata}
           onUpdateSuccess={handleUpdateSuccess}
         />
         {/* 수정후 처리  */}
@@ -155,10 +157,7 @@ function App() {
       <div className="App-footer">
         <div className="App-footer-container">
           <img src={logoTextImg} />
-          <select>
-            <option>한국어</option>
-            <option>English</option>
-          </select>
+          <LocaleSelect />
           <div className="App-footer-menu">
             서비스 이용약관 | 개인정보 처리방침
           </div>
@@ -177,6 +176,7 @@ export default App;
 // import FoodForm from "./components/Food"
 // import FoodForm from "./components/FoodForm"
 // import logoImg from "./assets/l"
+import LocaleSelect from './LocaleSelect';
 
 // const LIMIT = 5;
 

@@ -117,6 +117,7 @@ export async function updateDatas(collectionName, docId, updateObj) {
     const snapshot = await getDoc(docRef);
     const resultData = { ...snapshot.data(), docId: snapshot.id };
     return resultData;
+    // { ...snapshot.data(), docId: snapshot.id } 수정된 정보를 반환해줌
   } catch (error) {
     // 여기서는 콘솔만 찍었음
     console.log("Error Update:", error);

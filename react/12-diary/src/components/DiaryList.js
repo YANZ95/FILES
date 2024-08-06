@@ -4,6 +4,8 @@ import "./DiaryList.css";
 import DiaryItem from "./DiaryItem";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getUserAuth } from "../api/firebase";
 
 const sortOptionList = [
   { name: "최신순", value: "latest" },
@@ -33,11 +35,17 @@ function ControlMenu({ optionList, value, onChange }) {
   );
 }
 
-function DiaryList({ diaryList, auth }) {
+function DiaryList({ diaryList }) {
   // diaryList 을 넣으면 필터링을 넣을 수 있다.
   const [order, setOrder] = useState("latest");
   const [filter, setFilter] = useState("all");
   const Navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user);
+  // {isAuthenticated, awefr} 같은 객체로 묶어 쓰지 말고 따로 쓸 것
+  // 오류는 안 나더라도 경고문구 나올 확률이 매우 높음
+  const auth = getUserAuth();
+  // 이러면 function DiaryList({ diaryList, auth }) { 중 auth
+  // auth 제거 가능
 
   const checkLogin = () => {
     if (!auth.currentUser) {
@@ -86,6 +94,7 @@ function DiaryList({ diaryList, auth }) {
           <ControlMenu optionList={sortOptionList} onChange={setOrder} />
           <ControlMenu optionList={filterOptionList} onChange={setFilter} />
         </div>
+
         <div className="new_btn">
           <Button
             text={"새 일기쓰기"}
@@ -94,7 +103,7 @@ function DiaryList({ diaryList, auth }) {
             // onClick={() => Navigate("/new")}
           />
         </div>
-        {auth.currentUSer && (
+        {auth.currentUser && (
           <div>
             <Button
               text={"로그아웃"}
