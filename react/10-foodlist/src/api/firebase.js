@@ -138,30 +138,31 @@ function getQuery(collectionName, queryOption) {
 }
 
 async function getDatasOrderByLimit(collectionName, options) {
-  const { fieldName, limits } = options;
+  const q = getQuery(collectionName, options);
+  // const { fieldName, limits } = options;
   // 일단 두개 받아서 쓸거임
-  let q;
-  if (!options.lq) {
-    q = query(
-      // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
-      //  컬렉션 함수만 넣을거지만 다른 함수도 넣을 거라서 쿼리함수 넣어줌
-      getCollection(collectionName),
-      // 위에서 쓴 거 받아서 써줌
-      orderBy(fieldName, "desc"),
-      limit(limits)
-    );
-  } else {
-    q = query(
-      getCollection(collectionName),
-      orderBy(fieldName, "desc"),
-      startAfter(options.lq),
-      limit(limits)
-    );
-  }
+  // let q;
+  // if (!options.lq) {
+  //   q = query(
+  //     // 다 가져오되 정렬을 할 거고, 몇개만 가져올거고, 조건을 달아서 컬렉션함수만 넣을 거면
+  //     //  컬렉션 함수만 넣을거지만 다른 함수도 넣을 거라서 쿼리함수 넣어줌
+  //     getCollection(collectionName),
+  //     // 위에서 쓴 거 받아서 써줌
+  //     orderBy(fieldName, "desc"),
+  //     limit(limits)
+  //   );
+  // } else {
+  //   q = query(
+  //     getCollection(collectionName),
+  //     orderBy(fieldName, "desc"),
+  //     startAfter(options.lq),
+  //     limit(limits)
+  //   );
+  // }
 
-  async function updateDatas() {
-    console.log("updatas 함수 실행!!");
-  }
+  // async function updateDatas() {
+  //   console.log("updatas 함수 실행!!");
+  // }
 
   const snapshot = await getDocs(q);
   const docs = snapshot.docs;
@@ -199,7 +200,39 @@ async function deleteDatas(collectionName, docId, imgUrl) {
   }
 }
 
-export { addDatas, getDatasOrderByLimit, deleteDatas };
+async function updateDatas(collectionName, dataObj, docId) {
+  // console.log(imgUrl);
+  console.log(dataObj.imgUrl);
+  const docRef = await doc(db, collectionName, docId);
+  // 수정할 데이터 양식 생성 => title, content, rating, updatedAt, imgUrl
+  const time = new Date().getTime();
+  dataObj.updatedAt = time;
+  // 사진파일이 수정되면 => 기존사진 삭제 => 새로운사진 추가 => url 받아와서 imgUrl 값 셋팅
+  if (dataObj.imgUrl !== null) {
+    // 기존사진 url 가져오기
+    const docSnap = await getDoc(docRef);
+    const prevImgUrl = docSnap.data().imgUrl;
+    // 스토리지에서 기존사진 삭제
+    const storage = getStorage();
+    const deleteRef = ref(storage, prevImgUrl);
+    await deleteObject(deleteRef);
+    // 새로운사진 추가
+    const uuid = crypto.randomUUID();
+    const path = `movie/${uuid}`;
+    const url = await uploadImage(path, dataObj.imgUrl);
+    dataObj.imgUrl = url;
+  } else {
+    // imgUrl 프로퍼티 삭제
+    delete dataObj["imgUrl"];
+  }
+  // 사진파일이 수정되지 않으면 => 변경데이터만 업데이트
+  await updateDoc(docRef, dataObj);
+  const updatedData = await getDoc(docRef);
+  const resultData = { docId: updatedData.id, ...updatedData.data() };
+  return resultData;
+}
+
+export { addDatas, getDatasOrderByLimit, deleteDatas, updateDatas };
 
 // async function getDatas(collectionName) {
 //   const collect = await collection(db, collectionName);
