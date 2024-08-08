@@ -38,13 +38,15 @@ function CardList(product) {
   //  단 하나만 나와도 성공임
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productsSlice);
+  // Redux store의 state에서 products를 가져옵니다. 이 상태는 productsSlice에서 관리되고 있습니다.
   const category = "";
   useEffect(() => {
     const queryOptions = {
+        // queryOptions는 조건에 따라 제품을 필터링하기 위한 옵션입니다.
       conditions: [
         {
           field: "category",
-          operator: category ? "==" : ">=",
+          operator: category ? "==" : ">=",// category가 지정되면 '==' 연산자 사용
           value: category.toLowerCase(),
         },
       ],
@@ -54,10 +56,10 @@ function CardList(product) {
     // fetchProducts() => getdatas -> 데이터를 불러오려고 (state), state에 정보 넣어주는 게 action의 역할
     // fetch의 역할이 action을 만들어주는 역할을 한다.  action에 있는 type과 payload를 가져와야 되는데 후자만 없어서
     // payload를 가져와야 된다.
-    // 카드리스트 페이지의 존재의미는 카드아이템에 정보를 가져다주기 위한 것
+    // 카드리스트 페이지의 존재의미는 카드아이템 파일에 정보를 가져다주기 위한 것
     // getdatas에 정보를 다 가져다주는 게 아니라 파라미터 6개 정도 만들어서 대신 받아줄 거임
     // 디스패치를 쓰는 거는 스테이트의 상태를 변화시키기 위해서 쓰는 거임
-    // 셋함수는 유스스테이트에 나온 그 함수만 변화시킬 수 가 있다.
+    // 셋함수는 유스스테이트에 나온 해당하는 함수의 셋함수만 변화시킬 수 가 있다.
     // 스토어 하나에 다 관리되고 있으니까 디스패치 단 하나로 관리를 시키려는 거임
     // 액션에다가 타입과 페이로드를 집어넣는다.
   }, []);

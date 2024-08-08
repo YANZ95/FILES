@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer className={styles.footer}>
       <div className="container">
-        <div>
+      <div className={styles.contacts}>
           <Link
             to={"http://github.com"}
             target="_blank"

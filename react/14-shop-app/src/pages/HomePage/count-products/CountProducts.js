@@ -4,7 +4,7 @@ import styles from "./CountProducts.module.scss";
 function CountProducts() {
   return (
     <div className={styles.count_products}>
-      <p>Showing: 6 items</p>
+      <p>Showing: 20 items</p>
     </div>
   );
 }

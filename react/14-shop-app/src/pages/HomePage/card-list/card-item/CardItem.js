@@ -7,6 +7,7 @@ function CardItem({ item }) {
     <li className={styles.card_item}>
       <Link>
         <img src={item.image} />
+        {/* 이미지 크기 */}
       </Link>
       <h5>{item.title}</h5>
       <div>
