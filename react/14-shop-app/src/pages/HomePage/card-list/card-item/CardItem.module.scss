@@ -1,0 +1,71 @@
+.card_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 30px;
+  border: 1px solid #b6b2b2;
+  transition: 0.2s all ease-in-out;
+  //   올라갈 때 자연스럽게 올라가게 한다
+  gap: 20px;
+
+  &:hover {
+    transform: translateY(-5px);
+    // 호버시 살짝 상승하게 설정
+  }
+  img {
+    width: 100%;
+  }
+
+  a {
+    width: 100%;
+  }
+
+  h5 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  button {
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: var(--main-color);
+    background-color: #fff;
+    border: 1px solid var(--main-color);
+    cursor: pointer;
+    transition: 0.3s all ease;
+
+    &:hover {
+      color: #fff;
+      background-color: var(--second-color);
+    }
+    &:disabled {
+      color: #fff;
+      background-color: var(--second-color);
+    }
+  }
+  @media (min-width) {
+    width: 50%;
+  }
+  @media (min-width: 667px) {
+    width: 40%;
+  }
+  @media (min-width: 798px) {
+    width: 30%;
+  }
+  @media (min-width: 1015px) {
+    width: 24%;
+  }
+}
