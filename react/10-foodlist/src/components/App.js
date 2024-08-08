@@ -6,9 +6,18 @@ import FoodForm from "./FoodForm";
 import searchImg from "../assets/ic-search.png";
 import FoodList from "./FoodList";
 import { useEffect, useState } from "react";
-import { addDatas, deleteDatas, getDatasOrderByLimit } from "../api/firebase";
+import {
+  addDatas,
+  deleteDatas,
+  getDatasOrderByLimit,
+  getSearchDatas,
+  updateDatas,
+} from "../api/firebase";
 import { updateMetadata } from "firebase/storage";
 import LocaleSelect from "./LocaleSelect";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItems, setOrder } from "../store/foodSlice";
+import useAsync from "../hooks/useAsync";
 
 function AppSortButton({ children, selected, onClick }) {
   return (
@@ -27,37 +36,57 @@ function AppSortButton({ children, selected, onClick }) {
 const LIMITS = 5;
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [order, setOrder] = useState("createdAt");
+  const dispatch = useDispatch();
+  const { items, order, lq, hasNext, isLoading } = useSelector(
+    (state) => state.food
+  );
+  // const [items, setItems] = useState([]);
+  // const [order, setOrder] = useState("createdAt");
   // const [order, setOrder] = useState("food", options);
   // order: 정렬 순서
-  const [lq, setLq] = useState();
+  // const [lq, setLq] = useState();
   // lq: 마지막 쿼리(페이징 처리에 사용)
-  const [hasNext, setHasNext] = useState(true);
+  // const [hasNext, setHasNext] = useState(true);
+  const [search, setSearch] = useState("");
   // hasNext: 더 가져올 데이터가 있는지 여부
+  // const [isLoading, loadingError, getDatasAsync] =
+  //   useAsync(getDatasOrderByLimit);
 
   const handleLoad = async (options) => {
-    const { resultData, lastQuery } = await getDatasOrderByLimit(
-      "food",
-      options
-    );
-    if (!options.lq) {
-      setItems(resultData);
-    } else {
-      setItems((prevItems) => [...prevItems, ...resultData]);
-      // 배열 안에 배열을 넣은 형태, 이걸 풀어보고 싶어서 스프레드 연산자 사용하는 것
-    }
-    setLq(lastQuery);
-    if (!lastQuery) {
-      setHasNext(false);
-    }
+    dispatch(fetchItems({ collectionName: "food", queryOptions: options }));
+
+    // // setIsLoading(true);
+    // const { resultData, lastQuery } = await getDatasOrderByLimit(
+    //   "food",
+    //   options
+    // );
+    //   if (!options.lq) {
+    //     // setItems(resultData);
+    //   } else {
+    //     // setItems((prevItems) => [...prevItems, ...resultData]);
+    //     // 배열 안에 배열을 넣은 형태, 이걸 풀어보고 싶어서 스프레드 연산자 사용하는 것
+    //   }
+    //   setLq(lastQuery);
+    //   if (!lastQuery) {
+    //     setHasNext(false);
+    //   }
   };
   const handleLoadMore = async () => {
-    handleLoad({ fieldName: order, limits: LIMITS, lq: lq });
+    const queryOptions = {
+      conditions: [],
+      orderBys: [{ field: order, direction: "desc" }],
+      lastQuery: lq,
+      limits: LIMITS,
+    };
+    handleLoad(queryOptions);
+    // handleLoad({ fieldName: order, limits: LIMITS, lq: lq });
   };
 
-  const handleNewestClick = () => setOrder("createdAt");
-  const handleCalorieClick = () => setOrder("calorie");
+  const handleNewestClick = () => dispatch(setOrder("createdAt"));
+  const handleCalorieClick = () => dispatch(setOrder("calorie"));
+
+  // const handleNewestClick = () => setOrder("createdAt");
+  // const handleCalorieClick = () => setOrder("calorie");
 
   const handleDelete = async (docId, imgUrl) => {
     // imgUrl을 하나 더 받겠다.  firebase에 연결할거라서 async 사용
@@ -72,39 +101,57 @@ function App() {
       return;
     }
     //삭제 성공시 화면에 그 결과를 반영한다.
-    setItems((prevItems) =>
-      // prevItems. 15개 담긴 배열. 현재 state 값.  {...,docId}, {...,docId}... -> 15개
-      prevItems.filter(function (item) {
-        return item.docId !== docId;
-        // 삭제된 녀석만 삭제된 배열에 넣겠다는 말
-        // === => !== 같다가 아니라 다르다로 만듬
-      })
-    );
+    // setItems((prevItems) =>
+    // prevItems. 15개 담긴 배열. 현재 state 값.  {...,docId}, {...,docId}... -> 15개
+    //   prevItems.filter(function (item) {
+    //     return item.docId !== docId;
+    //     // 삭제된 녀석만 삭제된 배열에 넣겠다는 말
+    //     // === => !== 같다가 아니라 다르다로 만듬
+    //   })
+    // );
   };
 
   const handleAddSuccess = (resultData) => {
-    setItems((prevItems) => [resultData, ...prevItems]);
+    const queryOptions = {
+      conditions: [],
+    };
+    handleLoad(queryOptions);
+    // setItems((prevItems) => [resultData, ...prevItems]);
   };
 
   const handleUpdateSuccess = (result) => {
-    setItems((prevItems) => {
-      // 수정된 item의 index 찾기
-      const splitIdx = prevItems.findIndex(function (item) {
-        return item.id === result.id;
-      });
-      const beforeArr = prevItems.slice(0, splitIdx);
-      const afterArr = prevItems.slice(splitIdx + 1);
-      return [...beforeArr, result, ...afterArr];
-      // return [
-      //   ...prevItems.slice(0, splitIdx),
-      //   result,
-      //   ...prevItems.slice(splitIdx + 1)
-      // ]
-    });
+    console.log(result);
+    // setItems((prevItems) => {
+    // 수정된 item의 index 찾기
+    //   const splitIdx = prevItems.findIndex(function (item) {
+    //     return item.id === result.id;
+    //   });
+    //   const beforeArr = prevItems.slice(0, splitIdx);
+    //   const afterArr = prevItems.slice(splitIdx + 1);
+    //   return [...beforeArr, result, ...afterArr];
+    //   // return [
+    //   //   ...prevItems.slice(0, splitIdx),
+    //   //   result,
+    //   //   ...prevItems.slice(splitIdx + 1)
+    //   // ]
+    // });
   };
 
+  //   useEffect(() => {
+  //     // handleLoad({ fieldName: order, limits: LIMITS, lq: undefined });
+  //   }, [order]
+  // );
   useEffect(() => {
-    handleLoad({ fieldName: order, limits: LIMITS, lq: undefined });
+    // handleLoad({ fieldName: order, limits: LIMITS, lq: undefined });
+    const queryOptions = {
+      conditions: [],
+      orderBys: [{ field: order, direction: "desc" }],
+      lastQuery: undefined,
+      limits: LIMITS,
+    };
+    // const collectionName = "food";
+    // dispatch(fetchItems({ collectionName: "food", queryOptions }));
+    handleLoad(queryOptions);
   }, [order]);
 
   return (
@@ -143,7 +190,8 @@ function App() {
         <FoodList
           items={items}
           onDelete={handleDelete}
-          onUpdate={updateMetadata}
+          // onUpdate={updateData}
+          onUpdate={handleUpdate}
           onUpdateSuccess={handleUpdateSuccess}
         />
         {/* 수정후 처리  */}

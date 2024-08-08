@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { collection } from "firebase/firestore";
 import { addDatas, deleteDatas, getDatas, updateDatas } from "../api/firebase";
 
 const diarySlice = createSlice({
@@ -19,6 +18,7 @@ const diarySlice = createSlice({
     builder
       .addCase(fetchItems.pending, (state, action) => {
         // pending =>
+          console.log(action);
         state.status = "Loading";
         // 불변성을 유지하는 상태
         // 뒤에서 이런 작업들을 알아서 처리해줌
@@ -26,11 +26,12 @@ const diarySlice = createSlice({
       })
       .addCase(fetchItems.fulfilled, (state, action) => {
         // fulfilled => 완료된 상태
+        console.log(action);
         state.items = action.payload;
-        state.status = "complete";
+        state.status = 'complete';
       })
       .addCase(updateItem.rejected, (state, action) => {
-        // state.status = "fail";
+        state.status = "fail";
         // ----------------------------------------------
         // state.items.map((item) => {
         //   item.id === action.payload.id ? action.paload : item;
@@ -41,11 +42,19 @@ const diarySlice = createSlice({
         // 필터 함수 쓰는 이유 -> 원하는 것을 뽑으려고
         // 원초적인 것은 인덱스만 찾으면 됨
         //state.items[index] = {} //-> 이 방법이 더 쉬운 방법이다.
+      })
+      .addCase(addItem.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+        state.status = 'complete';
+      })
+      .addCase(updateItem.fulfilled, (state, action) => {
+             // state.items = state.items.map(item => {
+        //   item.id === action.payload.id ? action.payload : item
+        // })
         const index = state.items.findIndex(
           (item) => item.id === action.payload.id
         );
         state.items[index] = action.payload;
-
         state.status = "complete";
       })
       .addCase(deleteItem.fulfilled, (state, action) => {
@@ -95,9 +104,9 @@ const updateItem = createAsyncThunk(
   // 함수의 로직 안에 비동기 함수가 들어있는 게 createAsyncThunk
   // 액션과 크레이이터를 디스패치라고 한다?
   "items/updateItem",
-  async ({ collectionName, updateObj }) => {
+  async ({ collectionName, docId, updateObj }) => {
     try {
-      const resultData = await updateDatas(collectionName, updateObj);
+      const resultData = await updateDatas(collectionName, docId, updateObj);
       // 요 함수가 끝나면 디스패치와 페이로드 안으로 들어간다.
       //  디스패치가 실행하면 들어가는 곳이 리듀서임
       return resultData;

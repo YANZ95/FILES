@@ -1,0 +1,8 @@
+@mixin hover-effect($hover-color: blue) {
+  // 기본 설정 안 될 때 파라미터에 넣음
+  &:hover {
+    color: $hover-color;
+    cursor: pointer;
+    transition: 0.32 all ease;
+  }
+}
