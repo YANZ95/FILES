@@ -11,14 +11,14 @@ function FiltersCategory() {
         text={"전자기기"}
         categoryName={CategoriesName.Electronics}
       />
-      <CategoryTab text={"쥬얼리"} categoryName={CategoriesName.Jewerly} />
+      <CategoryTab text={"쥬얼리"} categoryName={CategoriesName.Jewelry} />
       <CategoryTab
         text={"남성의류"}
-        categoryName={CategoriesName.MensCloathing}
+        categoryName={CategoriesName.mensClothing}
       />
       <CategoryTab
         text={"여성의류"}
-        categoryName={CategoriesName.WomensClothing}
+        categoryName={CategoriesName.womensClothing}
       />
     </div>
   );

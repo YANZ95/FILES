@@ -81,10 +81,18 @@ function getQuery(collectionName, queryOption) {
 }
 
 export async function getDatas(collectionName, queryOptions) {
-  // 남이 쓴 일기 말고 내 꺼만 볼 수 있게 하는 거 겟 쿼리 위에 가져와야됨
   const q = getQuery(collectionName, queryOptions);
   const snapshot = await getDocs(q);
   const docs = snapshot.docs;
   const resultData = docs.map((doc) => ({ ...doc.data(), docId: doc.id }));
+  return resultData;
+}
+
+export async function getData(collectionName, queryOptions) {
+  //  모조건 한 개만 있는 데이터를 조회할 때 쓴는 게 getData
+  const q = getQuery(collectionName, queryOptions);
+  const snapshot = await getDocs(q);
+  const doc = snapshot.docs[0];
+  const resultData = { ...doc.data(), docId: doc.id };
   return resultData;
 }

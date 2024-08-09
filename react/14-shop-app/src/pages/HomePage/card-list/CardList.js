@@ -3,6 +3,8 @@ import styles from "./CardList.module.scss";
 import CardItem from "./card-item/CardItem";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../store/products/productsSlice";
+import categoriesSlice from "../../../store/categories/categoriesSlice";
+import CardSkeleton from "../card-skeleton/CardSkeleton";
 
 // const products = [
 //   {
@@ -37,16 +39,16 @@ function CardList(product) {
   // 위의 프로덕트가 이 안에 렌더링될 수 있도록 처리하기
   //  단 하나만 나와도 성공임
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.productsSlice);
+  const { products, isLoading } = useSelector((state) => state.productsSlice);
   // Redux store의 state에서 products를 가져옵니다. 이 상태는 productsSlice에서 관리되고 있습니다.
-  const category = "";
+  const category = useSelector((state) => state.categoriesSlice);
   useEffect(() => {
     const queryOptions = {
-        // queryOptions는 조건에 따라 제품을 필터링하기 위한 옵션입니다.
+      // queryOptions는 조건에 따라 제품을 필터링하기 위한 옵션입니다.
       conditions: [
         {
           field: "category",
-          operator: category ? "==" : ">=",// category가 지정되면 '==' 연산자 사용
+          operator: category ? "==" : ">=", // category가 지정되면 '==' 연산자 사용
           value: category.toLowerCase(),
         },
       ],
@@ -62,7 +64,13 @@ function CardList(product) {
     // 셋함수는 유스스테이트에 나온 해당하는 함수의 셋함수만 변화시킬 수 가 있다.
     // 스토어 하나에 다 관리되고 있으니까 디스패치 단 하나로 관리를 시키려는 거임
     // 액션에다가 타입과 페이로드를 집어넣는다.
-  }, []);
+  }, [category]);
+  // dependecy 안에 있으면 한 번 더 재실행시키는 역할을 한다.
+
+  if (isLoading) return <CardSkeleton />;
+
+  // if (isLoading) return "Loading...";
+
   return (
     <ul className={styles.card_list}>
       {products.map((product) => {
