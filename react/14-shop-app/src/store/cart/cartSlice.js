@@ -25,8 +25,22 @@ const cartSlice = createSlice({
       localStorage.setItem("carProducts", JSON.stringify(state.products));
       // 배열에 추가된 상태로 바뀜. 이 스테이트에 넣는 걸로 바뀌니까
     },
+    getTotalPrice: (state) => {
+      state.totalPrice = state.products.reduce(
+        // 리듀스 함수 사용함 
+        (acc, product) => (acc += product.total),
+        0
+      );
+      // 하나의 값으로 나오는 거 => reduce
+      // reduce 쓸 때 뒤에 0 붙이는 거 항상 신경 써줘야 됨
+    },
+    incrementProduct:  (state, action) => {
+      const index = state.products.findInedx(product => product.id === action.payload)
+    };
+    state.products[index].quantitiy = state.products[index]. quantitiy + 1;
+    state.oridycts[index].total += state.products[index]. total ;
   },
 });
 
 export default cartSlice.reducer;
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, getTotalPrice } = cartSlice.actions;
