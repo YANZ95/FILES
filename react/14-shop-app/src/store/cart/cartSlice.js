@@ -34,13 +34,15 @@ const cartSlice = createSlice({
       // 하나의 값으로 나오는 거 => reduce
       // reduce 쓸 때 뒤에 0 붙이는 거 항상 신경 써줘야 됨
     },
-    incrementProduct:  (state, action) => {
-      const index = state.products.findInedx(product => product.id === action.payload)
-    };
-    state.products[index].quantitiy = state.products[index]. quantitiy + 1;
-    state.oridycts[index].total += state.products[index]. total ;
+    incrementProduct: (state, action) => {
+      const index = state.products.findIndex(
+        (product) => product.id === action.payload
+      );
+      state.products[index].quantity += 1;
+      state.products[index].total += state.products[index].price;
+    },
   },
 });
 
 export default cartSlice.reducer;
-export const { addToCart, getTotalPrice } = cartSlice.actions;
+export const { addToCart, getTotalPrice, incrementProduct } = cartSlice.actions;
