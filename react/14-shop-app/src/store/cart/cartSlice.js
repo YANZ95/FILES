@@ -6,6 +6,8 @@ import {
   updateTotalAndQuantity,
   createOrder,
 } from '../../firebase';
+import { addDatasRest, deleteDatasRest, deleteDatasRestBatch } from '../../api';
+
 
 const initialState = {
   products: localStorage.getItem("cartProducts")
@@ -111,7 +113,8 @@ export const deleteCartItem = createAsyncThunk(
   'cart/deleteCartItem',
   async ({ collectionName, productId }, thunkAPI) => {
     try {
-      const resultData = await deleteDatas(collectionName, productId);
+      // const resultData = await deleteDatas(collectionName, productId);
+      const resultData = await deleteDatasRest(collectionName + productId);
       if (resultData) {
         thunkAPI.dispatch(deleteFromCart(productId));
       }
@@ -142,7 +145,24 @@ export const postOrder = createAsyncThunk(
   async ({ uid, cart }, thunkAPI) => {
     try {
       // createOrder 함수 호출
-      const result = await createOrder(uid, cart);
+      // const result = await createOrder(uid, cart);
+      const orderObj = {
+        cancelYn: 'N',
+        createdAt: new Date().getTime(),
+        updatedAt: new Date().getTime(),
+        ...cart,
+      };
+
+      const result = await addDatasRest(
+        `/users/${uid}/orders/${crypto.randomUUID().slice(0, 20)}`,
+        orderObj
+      );
+
+      const deleteResult = await deleteDatasRestBatch(
+        `users/${uid}/cart`,
+        cart.products
+      );
+
       if (!result) {
         return;
       }

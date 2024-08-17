@@ -2,9 +2,68 @@ import React from "react"; // React 라이브러리를 가져와 컴포넌트를
 import styles from "./CartItem.module.scss"; // CSS 모듈을 가져와 컴포넌트 스타일링에 사용합니다.
 import { AiOutlineDelete } from "react-icons/ai"; // react-icons 라이브러리에서 삭제 아이콘을 가져옵니다.
 import { Link } from "react-router-dom"; // 페이지 간의 링크를 제공하기 위해 react-router-dom에서 Link 컴포넌트를 가져옵니다.
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  calculateTotalAndQuantity,
+  decrementProduct,
+  deleteCartItem,
+  deleteFromCart,
+  incrementProduct,
+} from '../../../../store/cart/cartSlice';
 
-function CartItem({ image, title, price, category, quantity, total }) {
+
+function CartItem({ image, title, price, category, quantity, total, id }) {
   // CartItem 컴포넌트는 props로 전달된 상품 정보를 받아와 화면에 표시합니다.
+  
+  const dispatch = useDispatch();
+  const { isAuthenticated, uid } = useSelector((state) => state.userSlice);
+
+
+  const incrementCount = () => {
+    if (isAuthenticated) {
+      dispatch(
+        calculateTotalAndQuantity({
+          uid,
+          productId: id,
+          operator: 'increment',
+        })
+      );
+    } else {
+      dispatch(incrementProduct(id));
+    }
+  };
+  const decrementCount = () => {
+    if (isAuthenticated) {
+      dispatch(
+        calculateTotalAndQuantity({
+          uid,
+          productId: id,
+          operator: 'decrement',
+        })
+      );
+    } else {
+      dispatch(decrementProduct(id));
+    }
+  };
+
+  const deleteProduct = () => {
+    if (isAuthenticated) {
+      dispatch(
+        // deleteCartItem({
+        //   collectionName: ['users', uid, 'cart'],
+        //   productId: id,
+        // })
+        deleteCartItem({
+          collectionName: `/users/${uid}/cart/`,
+          productId: id,
+        })
+      );
+    } else {
+      dispatch(deleteFromCart(id));
+    }
+  };
+
+  
   return (
     <div className={styles.cart_item}>
       {/* 스타일링을 위해 CSS 클래스를 div에 적용합니다. */}
@@ -25,25 +84,24 @@ function CartItem({ image, title, price, category, quantity, total }) {
           {/* 상품의 가격, 수량, 총합을 계산하여 표시합니다. */}
         </span>
       </div>
-      <button className={styles.cart_delete}>
-        {/* 삭제 버튼 스타일링을 적용합니다. */}
-        <AiOutlineDelete />
-        {/* 삭제 아이콘을 버튼에 표시합니다. */}
-      </button>
       <div className={styles.cart_count}>
-        {/* 상품 수량 조절을 위한 스타일링을 적용한 div입니다. */}
         <div>
-          <button>-</button>
-          {/* 수량 감소 버튼입니다. */}
-          <span>1</span>
-          {/* 현재 수량을 표시합니다. */}
-          <button>+</button>
-          {/* 수량 증가 버튼입니다. */}
+          <button disabled={quantity === 1} onClick={decrementCount}>
+            -
+          </button>
+          <span>{quantity}</span>
+          <button disabled={quantity === 10} onClick={incrementCount}>
+            +
+          </button>
         </div>
       </div>
+      <button className={styles.cart_delete} onClick={deleteProduct}>
+        <AiOutlineDelete />
+      </button>
     </div>
   );
 }
+
 
 export default CartItem; // 이 컴포넌트를 다른 곳에서 사용할 수 있도록 내보냅니다.
 

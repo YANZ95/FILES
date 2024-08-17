@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../store/products/productsSlice";
 import categoriesSlice from "../../../store/categories/categoriesSlice";
 import CardSkeleton from "../card-skeleton/CardSkeleton";
+import { getDatasRest } from '../../../api';
 
 // const products = [
 //   {
@@ -35,26 +36,43 @@ import CardSkeleton from "../card-skeleton/CardSkeleton";
 //   },
 // ];
 
-function CardList(product) {
-  // 위의 프로덕트가 이 안에 렌더링될 수 있도록 처리하기
+//function CardList(product) {
+  function CardList() {  
+// 위의 프로덕트가 이 안에 렌더링될 수 있도록 처리하기
   //  단 하나만 나와도 성공임
   const dispatch = useDispatch();
   const { products, isLoading } = useSelector((state) => state.productsSlice);
   // Redux store의 state에서 products를 가져옵니다. 이 상태는 productsSlice에서 관리되고 있습니다.
   const category = useSelector((state) => state.categoriesSlice);
+  const handleLoad = async () => {
+    const queryOptions = {
+      conditions: [
+        {
+          field: 'category',
+          operator: category ? 'EQUAL' : 'GREATER_THAN_OR_EQUAL',
+          value: category.toLowerCase(),
+        },
+      ],
+    };
+    const restResult = await getDatasRest('products', queryOptions);
+  };
+  
+  
   useEffect(() => {
     const queryOptions = {
       // queryOptions는 조건에 따라 제품을 필터링하기 위한 옵션입니다.
       conditions: [
         {
           field: "category",
-          operator: category ? "==" : ">=", // category가 지정되면 '==' 연산자 사용
-          value: category.toLowerCase(),
+        //  operator: category ? "==" : ">=", // category가 지정되면 '==' 연산자 사용
+        operator: category ? 'EQUAL' : 'GREATER_THAN_OR_EQUAL', 
+        value: category.toLowerCase(),
         },
       ],
       // 카테고리랑 연결이 되어 있음
     };
     dispatch(fetchProducts({ collectionName: "products", queryOptions }));
+        // handleLoad();
     // fetchProducts() => getdatas -> 데이터를 불러오려고 (state), state에 정보 넣어주는 게 action의 역할
     // fetch의 역할이 action을 만들어주는 역할을 한다.  action에 있는 type과 payload를 가져와야 되는데 후자만 없어서
     // payload를 가져와야 된다.
@@ -74,7 +92,7 @@ function CardList(product) {
   return (
     <ul className={styles.card_list}>
       {products.map((product) => {
-        return <CardItem item={product} />;
+        return <CardItem key={product.id} item={product} />;
       })}
     </ul>
   );
