@@ -36,8 +36,8 @@ import { getDatasRest } from '../../../api';
 //   },
 // ];
 
+function CardList() {  
 //function CardList(product) {
-  function CardList() {  
 // 위의 프로덕트가 이 안에 렌더링될 수 있도록 처리하기
   //  단 하나만 나와도 성공임
   const dispatch = useDispatch();
@@ -71,8 +71,9 @@ import { getDatasRest } from '../../../api';
       ],
       // 카테고리랑 연결이 되어 있음
     };
-    dispatch(fetchProducts({ collectionName: "products", queryOptions }));
-        // handleLoad();
+    dispatch(fetchProducts({ collectionName: 'products', queryOptions }));
+    //   dispatch(fetchProducts({ collectionName: "products", queryOptions }));
+   // handleLoad();
     // fetchProducts() => getdatas -> 데이터를 불러오려고 (state), state에 정보 넣어주는 게 action의 역할
     // fetch의 역할이 action을 만들어주는 역할을 한다.  action에 있는 type과 payload를 가져와야 되는데 후자만 없어서
     // payload를 가져와야 된다.
