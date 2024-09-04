@@ -4,7 +4,7 @@ import Button from "./Button";
 import { emotionList } from "../utill/emotion";
 import EmotionItem from "./EmotionItem";
 import "./DiaryEditor.css";
-import { DiaryDisatchContext } from "../App";
+import { DiaryDispatchContext } from "../App";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const INITIAL_VALUES = {
@@ -17,7 +17,7 @@ function DiaryEditor({ originData = INITIAL_VALUES, isEdit }) {
   // 앱 파일의 컨텍스트를 써줌 , function DiaryEditor,  useContext(DiaryDisatchContext)
   // 데이터를 추가하는 함수 - onCreate 함수, 이거를
   // 뭘로 넘겨주냐면 context로 넘긴다고 했음
-  const { onCreate, onUpdate, onDelete } = useContext(DiaryDisatchContext);
+  const { onCreate, onUpdate, onDelete } = useContext(DiaryDispatchContext);
   // 1.날짜, 감정, 텍스트 관리할 상태를 만들어야한다.
   //   const [selectedEmotion, setSelectedEmotion] = useState(null);
   // 편하게 쓰려고 구조분해를 써주는 거

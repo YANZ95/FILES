@@ -4,9 +4,12 @@ import * as FcIcons from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { DiaryStateContext } from "../App";
 import { Navigate, useNavigate } from "react-router-dom";
+import { getUserAuth } from "../api/firebase";
 
 function LoginPage() {
-  const { auth } = useContext(DiaryStateContext);
+  // const { auth } = useContext(DiaryStateContext);
+  // useContext 값을 바꿔 undefined 오류가 뜸 
+  const auth = getUserAuth();
   const navigate = useNavigate();
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();

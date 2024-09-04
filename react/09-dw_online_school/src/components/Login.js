@@ -23,9 +23,9 @@ const LoginContainer = styled.div`
     margin-bottom: 16px;
   }
 
-  &::placeholder {
+  /* &::placeholder {
     color: #c4c5cd;
-  }
+  } */
 `;
 
 const Logo = styled.h1`
@@ -41,6 +41,7 @@ const Logo = styled.h1`
 
 const Description = styled.div`
   color: #848187;
+  text-align: center;
 `;
 
 const Label = styled.label`
@@ -69,10 +70,13 @@ function Login(props) {
     //   return {...prevValues, [name]: value};
     // })
     // 일반함수
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    // setValues((prevValues) => ({
+    //   ...prevValues,
+    //   [name]: value,
+    // }));
+    setValues(function (prevValues) {
+      return { ...prevValues, [name]: value };
+    });
     // 화살표 함수, 똑같은 거를 다른 방식으로 쓴 거
     // 일반함수로도 가능하지만 화살표함수가 더 간단하고 쉬워서 화살표함수 사용함
     // 리액트에서는 주로 화살표함수를 사용하지만 실무에서는 일반함수 많이 사용함
@@ -85,6 +89,7 @@ function Login(props) {
     const { memberObj, message } = await getMember(values);
     if (Object.keys(memberObj).length === 0) {
       // 로그인 실패
+      alert(message);
     } else {
       // 로그인 성공
       localStorage.setItem("member", JSON.stringify(memberObj));
