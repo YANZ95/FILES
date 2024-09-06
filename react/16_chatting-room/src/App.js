@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './App.css';
+import closeBtn from "./closeIcon.svg"
 
-function App() {
+function App(handleClose) {
 const [selectedAnswer, setSelectedAnswer] = useState('');
 
 const answers = {
@@ -22,6 +23,7 @@ const showAnswer = (answerKey) => {
       <div className='chattingRoom'>
         <header>
       <h2>아이팜 채팅상담</h2>
+      <button onClick={handleClose}><img src={closeBtn} alt="닫기" style={{width:'16px', height:'16px'}} /></button>
       <p>무엇을 도와드릴까요?</p>
   </header>
    <div className='questionButtons'>

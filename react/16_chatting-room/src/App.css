@@ -12,15 +12,18 @@
 .App {
   background-color: #fcf8f3;
   padding: 50px;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
   height: 500px;
-  text-align: center;
-  margin-top: 10%;
-  margin-left: 20%;
-  /* position: relative; */
-  
+  max-width: 60%;
+  max-height: 50%;
+  text-align: left;
+  margin-top: 16%;
+  margin-left: 10%;
+position: relative;
 }
 
 /* .chattingRoom {
@@ -63,27 +66,14 @@
   margin: 0;
 } */
 
-.App {
-  background-color: #fcf8f3;
-  padding: 50px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  max-width: 40%;
-  max-height: 50%;
-  text-align: left;
-  margin-top: 10%;
-  margin-left: 20%;
-position: relative;
-}
+
 
 .App header, .App footer {
-  font-size: 18px;
+  font-size: 16px;
 background-color: #a2ca71;
-border-radius: 5px;
 position: absolute;
 left: 0;
+/* color:#fcf8f3; */
 }
 
 .App header {
@@ -91,12 +81,29 @@ left: 0;
   left: 0;
   right: 0;
   padding: 0;
+  border-radius: 20px 20px  0 0;
 }
 .App header h2 {
-  margin: 0;
+  margin: 10px 0 0 12px;
+}
+.App header button {
+  margin: 10px 0 0 12px;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  border-radius: 10px;
+  padding: 14px;
+  background-color: #a2ca71;
+}
+.App header button:hover {
+  background-color: #669900;
+}
+.closeBtn {
+  width: 16px;
+  height: 16px;
 }
 .App header p {
-  margin: 10px;
+  margin: 10px 15px;
 }
 
 .App footer {
@@ -104,6 +111,7 @@ left: 0;
   bottom: 0;
   left: 0;
   padding: 10px 0;
+  border-radius: 0 0 16px 16px;
 }
 
 /* .chattingRoom {
@@ -135,11 +143,12 @@ left: 0;
 }
 
 .answer-area {
-  margin-top: 80px;
+  margin: 20px 15px 0;
   padding: 10px;
   border-top: 1px solid #ddd;
   min-height: 50px;
   background-color: #669900;
-  color: #fcf8f3
+  color: #fcf8f3;
+  border-radius: 12px;
 }
 
