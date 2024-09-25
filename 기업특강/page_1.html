@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="height=1080, initial-scale=1.0, user-scalable=yes">
+ <meta name="description" content="">
+ <meta name="startPage" content="page_1">
+ <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+ <link rel="stylesheet" href="./css/bootstrap-3.3.7.min.css">
+ <link rel="stylesheet" href="./css/bootstrap-datetimepicker.css">
+ <link rel="stylesheet" href="./css/jquery-ui-1.11.4.min.css">
+ <link rel="stylesheet" href="./css/jquery-keyboard.css">
+ <link rel="stylesheet" href="./css/jquery-jqgrid-ui.css">
+ <link rel="stylesheet" href="./css/jquery-messagebox.css">
+ <link rel="stylesheet" href="./css/jqPropertyGrid.css">
+ <link rel="stylesheet" href="./css/spectrum.css">
+ <link rel="stylesheet" href="./css/jquery.fontpicker.css">
+ <link rel="stylesheet" href="./css/bootstrap-treeview.min.css">
+ <link rel="stylesheet" href="./css/xisom.common.css">
+ <link rel="stylesheet" href="./css/xisom.yttrendchart.css">
+ <link rel="stylesheet" href="./css/xisom.usermenu.css">
+ <!--[if lt IE 9]><script src="./lib/html5shiv.min.js"></script><script src="./lib/respond.min.js"></script><![endif]-->
+ <title></title>
+</head>
+<body>
+<div id="xisom-wrap" class="hide">
+<div id="nav" class="hide"></div>
+ <div id="page_1" class="contents">
+	<div class="div-1">
+		<svg width="1920" height="1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<g id="아날로그" visibility="visible" transform="rotate(0 0 0)">
+				<svg width="360" height="80" x="40" y="50">
+					<text x="0" transform="translate(0, 0) " text-anchor="start" font-family="Arial" font-size="46.26243pt" font-style="normal" font-weight="normal" style="fill:#000000; fill-opacity:1; stroke-linecap:round; stroke-linejoin:round; stroke-width:1px; stroke-dasharray:1,0; stroke-miterlimit:10; stroke:none; stroke-opacity:0;"><tspan x="0" y="65" xml:space="preserve">아날로그</tspan></text>
+				</svg> 
+			</g>
+			<g id="digital" visibility="visible" transform="rotate(0 0 0)">
+				<svg width="440" height="160" x="960" y="30">
+					<text x="0" transform="translate(0, 0) " text-anchor="start" font-family="Arial" font-size="93.32486pt" font-style="normal" font-weight="normal" style="fill:#000000; fill-opacity:1; stroke-linecap:round; stroke-linejoin:round; stroke-width:1px; stroke-dasharray:1,0; stroke-miterlimit:10; stroke:none; stroke-opacity:0;"><tspan x="0" y="132" xml:space="preserve">디지털</tspan></text>
+				</svg> 
+			</g>
+			<g id="label_1" visibility="visible" transform="rotate(0 0 0)">
+				<svg width="540" height="110" x="50" y="160">
+					<rect x="0" y="0" width="540.144" height="110" rx="0" ry="0" style="fill:#FFFFFF; fill-opacity:1; stroke-width:1px; stroke:#000000; stroke-opacity:1; transform=""" />
+					<text x="2%" transform="translate(0, 0) " text-anchor="start" font-family="Arial" font-size="65.6151pt" font-style="normal" font-weight="normal" style="fill:#000000; fill-opacity:1; stroke-width:1px;"><tspan x="2%" y="91" xml:space="preserve">Text</tspan></text>
+				</svg> 
+			</g>
+			<g id="label_2" visibility="visible" transform="rotate(0 0 0)">
+				<svg width="430" height="110" x="1000" y="190">
+					<rect x="0" y="0" width="429.99" height="110" rx="0" ry="0" style="fill:#FFFFFF; fill-opacity:1; stroke-width:1px; stroke:#000000; stroke-opacity:1; transform=""" />
+					<text x="2%" transform="translate(0, 0) " text-anchor="start" font-family="Arial" font-size="65.6151pt" font-style="normal" font-weight="normal" style="fill:#000000; fill-opacity:1; stroke-width:1px;"><tspan x="2%" y="91" xml:space="preserve">Text</tspan></text>
+				</svg> 
+			</g>
+			<line id="line_1" x1="60" y1="480" x2="1430" y2="480.01" visibility="visible" transform="rotate(0 0 0)" style="fill:none; fill-opacity:0; stroke-linecap:round; stroke-linejoin:round; stroke-width:1px; stroke-dasharray:1,0; stroke-miterlimit:10; stroke:#000000; stroke-opacity:1;" />
+			<rect id="rectangle_1" x="60" y="440" width="250" height="100" rx="0" ry="0" visibility="visible" transform="rotate(0 0 0)" style="fill:#7DB6EF; fill-opacity:1; stroke-linecap:round; stroke-linejoin:round; stroke-width:1px; stroke-dasharray:1,0; stroke-miterlimit:10; stroke:#000000; stroke-opacity:1;" />
+		</svg>
+	</div>
+ </div>
+</div>
+<div class="loader"><div>Loading..</div></div>
+<div class="hide"><input id="xisom-keypad" type="text" /></div>
+<div class="hide"><audio id="xisom-audio-player"></audio></div>
+<div id="xisom-modal"></div>
+<div class="modal fade sm" id="xisom-message" role="dialog">
+	<div class="modal-dialog modal-sm">
+	  <div class="modal-content">
+		<div class="modal-header box-warning">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title size-17" id="xisom-message-header"></h4>
+		</div>
+		<div id="xisom-message-body" class="modal-body text-center padding-top-30 padding-bottom-30 size-15  box-white"></div>
+	  </div>
+	</div>
+</div>
+<style>
+   html {width:1920px;}
+   body {width:1920px;background-color:#FFFFFF;}
+   .contents {width:1920px;height:1080px;background-color:#F5F5F5;}
+   .div-1 {position:absolute;display:block;z-index:1;height:100%;}
+</style>
+<script>var __pageOption = {zoomMinWidth:800, zoom:false, align:"left"}</script>
+<script src="./lib/jquery-2.2.4.min.js"></script>
+<script src="./lib/d3-3.5.17.min.js"></script>
+<script src="./lib/moment.min.js"></script>
+<script src="./lib/moment-with-locales.min.js"></script>
+<script src="./lib/bootstrap-3.3.7.min.js"></script>
+<script src="./lib/bootstrap-datetimepicker.min.js"></script>
+<script src="./lib/jquery-ui-1.11.4.min.js"></script>
+<script src="./lib/jquery-number.min.js"></script>
+<script src="./lib/jquery-keyboard.min.js"></script>
+<script src="./lib/jquery-keyboard.extension-typing.min.js"></script>
+<script src="./lib/jquery-jqgrid-locale-en.min.js"></script>
+<script src="./lib/jquery-jqgrid.min.js"></script>
+<script src="./lib/jquery-dateformat.min.js"></script>
+<script src="./lib/jquery-messagebox.min.js"></script>
+<script src="./lib/echarts.min.js"></script>
+<script src="./lib/echarts.extension-datatool.min.js"></script>
+<script src="./lib/jquery.fontpicker.js"></script>
+<script src="./lib/spectrum.js"></script>
+<script src="./lib/jqPropertyGrid.js"></script>
+<script src="./lib/qrcode.js"></script>
+<script src="./lib/jsbarcode.js"></script>
+<script src="./lib/bootstrap-treeview.js"></script>
+<script src="./js/xisom.tooltip.js"></script>
+<script src="./js/xisom.common.js"></script>
+<script src="./js/xisom.alarms.js"></script>
+<script src="./js/xisom.page.js"></script>
+<script src="./js/xisom.scada.js"></script>
+<script src="./js/xisom.viewelement.js"></script>
+<script src="./js/xisom.widgetelement.js"></script>
+<script src="./js/xisom.shapeelement.js"></script>
+<script src="./js/xisom.data.js"></script>
+<script src="./js/xisom.action.js"></script>
+<script src="./js/xisom.animation.js"></script>
+<script src="./js/xisom.story.js"></script>
+<script src="./js/xisom.js"></script>
+<script src="./js/xisom.chartelement.js"></script>
+<script src="./js/xisom.trend-chart.js"></script>
+<script src="./js/xisom.trend-view.js"></script>
+<script src="./js/xisom.e-chart.js"></script>
+<script src="./js/xisom.shape.js"></script>
+<script src="./js/xisom.misc.js"></script>
+<script src="./js/xisom.group.js"></script>
+<script src="./js/xisom.mediaelement.js"></script>
+<script src="./js/xisom.media.js"></script>
+<script src="./js/xisom.widgets.js"></script>
+<script src="./js/xisom.arts.js"></script>
+<script src="./js/xisom.lines.js"></script>
+<script src="./js/xisom.controls.js"></script>
+<script src="./js/xisom.yttrendchart.js"></script>
+<script src="./js/args/empty.js"></script>
+<script src="./js/pages/page_1.js"></script>
+<script src="./js/xisom.usermenu.js"></script>
+</body>
+</html>
