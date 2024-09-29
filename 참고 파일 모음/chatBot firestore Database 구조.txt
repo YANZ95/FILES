@@ -1,4 +1,114 @@
 firestore Database 구조 
  chatroom 컬렉션 ->  yjw1732@gmail.com 문서 -> chatContent 컬렉션 -> xe0SB~  문서 ->
- message 컬렉션| activeYn: "N" chatEnd: "채팅 종료 여부"  chatTheme: "상담 카테고리" createdAt: "채팅방 생성일" 필드 -> 
+ message 컬렉션| activeYn: "N" chatEnd: "채팅 종료 여부"  chatTheme: "상담 카테고리" createdAt: "채팅방 생성일" nickName: "유저의 닉네임" 필드 -> 
 Lfb~ 문서 -> content: "채팅 내용" createdAt: "전송시간" uid: "유저 고유 아이디" 구조
+
+
+users 컬렉션 -> users 문서 -> 필드
+
+필드의 내용물 [ address
+"경기 화성시 기배로 37 "
+(문자열)
+
+
+complaneNum
+0
+(번호)
+
+
+createdAt
+1727419826910
+(번호)
+
+
+deleteYn
+"N"
+(문자열)
+
+
+docId
+"FYGzWZms2rhbDBRuHwxY2d9PMLt1"
+(문자열)
+
+
+email
+"il@gmail.com"
+(문자열)
+
+
+farmAddress
+""
+(문자열)
+
+
+isAuthenticated
+true
+(불리언)
+
+
+liked
+""
+(문자열)
+
+
+name
+"일론머스크"
+(문자열)
+
+
+nickname
+"화성갈꺼야"
+(문자열)
+
+
+number
+"01078486878"
+(문자열)
+
+
+password
+"qwer1234!!"
+(문자열)
+
+
+photoUrl
+"https://firebasestorage.googleapis.com/v0/b/ifarm-dd7b6.appspot.com/o/profiles%2Fea18520b-0c8c-47f1-9143-5c27da424c35?alt=media&token=71b8e320-b529-4fa4-8585-0f8ecd30a821"
+(문자열)
+
+
+token
+"AMf-vBzFQfg_nkTlHiVZl9-r70e-mobiNE9Feo40Yr7u2JxLFlguOK3a-VGJDjgzRDAAfDEHxO01syuUVk8fURtku2uip9h1tP5fPfEWJFfl_pagSyGmsjOyoOZfv0STuZrGvj6Zs-VEJAMclnHujy7wO8RtWkxEbzTnLjhdne-sLhwJRoasCdSmmgMLP7MnfwZcgfYNta1m"
+(문자열)
+
+
+uid
+"FYGzWZms2rhbDBRuHwxY2d9PMLt1"
+(문자열)
+
+
+updatedAt
+1727419923748
+
+}
+
+
+그냥 여기다 저장을 하자
+
+현재 컬렉션으로 만들 수 있는 Requestitem 
+
+chatContent Collection
+
+chatTheme (상담 카테고리) | createdAt (채팅방 생성일) | actve Yn - N & chatEnd - N (신규)  
+
+chatTheme (상담 카테고리) | createdAt (채팅방 생성일) | actve Yn - N & chatEnd - Y (미완료)  
+
+chatTheme (상담 카테고리) | createdAt (채팅방 생성일) | actve Yn - Y & chatEnd - N (상담중)  
+
+chatTheme (상담 카테고리) | createdAt (채팅방 생성일) | actve Yn - Y & chatEnd - Y (완료)  
+
+
+이건 너무 허접하잖아...
+
+만들어야 되는 item
+
+chatTheme (상담 카테고리) | createdAt (채팅방 생성일) | actve Yn - N & chatEnd - N (신규)  
